@@ -29,9 +29,6 @@
 
 @end // UIView (ZUX) end
 
-ZUX_EXTERN NSString *const zLayoutRelativeViewKey;
-ZUX_EXTERN NSString *const zLayoutDimensionsDictionaryKey;
-
 ZUX_EXTERN NSString *const zLeftMargin;
 ZUX_EXTERN NSString *const zWidth;
 ZUX_EXTERN NSString *const zRightMargin;
@@ -47,7 +44,7 @@ ZUX_EXTERN NSString *const zBottomMargin;
 @end // UIView (ZUXAutoLayout) end
 
 #if NS_BLOCKS_AVAILABLE
-typedef CGFloat (^ZUXDimensionBlock)(UIView *superview);
+typedef CGFloat (^ZUXDimensionBlock)(UIView *relativeView);
 #endif
 
 @interface ZUXDimension : NSObject
