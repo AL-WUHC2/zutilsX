@@ -1,0 +1,6 @@
+.DS_Store
+.idea
+*.xcworkspace
+xcuserdata
+*.xcuserdatad
+*.xcuserstate
