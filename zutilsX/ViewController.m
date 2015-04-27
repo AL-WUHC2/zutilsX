@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "zutilsX.h"
 
 @interface ViewController ()
 
@@ -17,12 +18,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor lightGrayColor];
-    // Do any additional setup after loading the view, typically from a nib.
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    NSDictionary *dimensions = @{zRightMargin : @20,
+                                 zWidth : [ZUXDimension dimensionWithBlock:^CGFloat(UIView *relativeView) {
+                                     return relativeView.bounds.size.width - 40;
+                                 }],
+                                 zBottomMargin : @49,
+                                 zTopMargin : @20
+                                 };
+    UIView *subView = [[UIView alloc] initWithRelativeView:self.view
+                           autolayoutByDimensionDictionary:dimensions];
+    subView.backgroundColor = [UIColor darkGrayColor];
+    [self.view addSubview:subView];
+    [subView release];
 }
 
 @end

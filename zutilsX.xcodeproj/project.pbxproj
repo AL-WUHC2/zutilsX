@@ -12,6 +12,13 @@
 		6A62CBC11AEDDA7A0017D418 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A62CBC01AEDDA7A0017D418 /* ViewController.m */; };
 		6A62CBD51AEDDA7A0017D418 /* zutilsXTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A62CBD41AEDDA7A0017D418 /* zutilsXTests.m */; };
 		6A62CBE01AEDDE100017D418 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A62CBDF1AEDDE100017D418 /* Images.xcassets */; };
+		6A62CBE71AEDDF970017D418 /* NSNull+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A62CBE61AEDDF970017D418 /* NSNull+ZUX.m */; };
+		6A62CBEA1AEDE02D0017D418 /* UIView+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A62CBE91AEDE02D0017D418 /* UIView+ZUX.m */; };
+		6A62CBED1AEDE1AA0017D418 /* ZUXView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A62CBEC1AEDE1AA0017D418 /* ZUXView.m */; };
+		6A62CBF41AEE5A740017D418 /* NSNumber+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A62CBF31AEE5A740017D418 /* NSNumber+ZUX.m */; };
+		6A62CBF81AEE65400017D418 /* NSArray+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A62CBF71AEE65400017D418 /* NSArray+ZUX.m */; };
+		6A62CBFB1AEE65BC0017D418 /* NSDictionary+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A62CBFA1AEE65BC0017D418 /* NSDictionary+ZUX.m */; };
+		6A62CBFF1AEE810A0017D418 /* NSObject+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A62CBFE1AEE810A0017D418 /* NSObject+ZUX.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +43,22 @@
 		6A62CBD31AEDDA7A0017D418 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6A62CBD41AEDDA7A0017D418 /* zutilsXTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zutilsXTests.m; sourceTree = "<group>"; };
 		6A62CBDF1AEDDE100017D418 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		6A62CBE51AEDDF970017D418 /* NSNull+ZUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSNull+ZUX.h"; path = "categories/foundation/NSNull+ZUX.h"; sourceTree = "<group>"; };
+		6A62CBE61AEDDF970017D418 /* NSNull+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSNull+ZUX.m"; path = "categories/foundation/NSNull+ZUX.m"; sourceTree = "<group>"; };
+		6A62CBE81AEDE02D0017D418 /* UIView+ZUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+ZUX.h"; path = "categories/uikit/UIView+ZUX.h"; sourceTree = "<group>"; };
+		6A62CBE91AEDE02D0017D418 /* UIView+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+ZUX.m"; path = "categories/uikit/UIView+ZUX.m"; sourceTree = "<group>"; };
+		6A62CBEB1AEDE1AA0017D418 /* ZUXView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZUXView.h; path = views/ZUXView.h; sourceTree = "<group>"; };
+		6A62CBEC1AEDE1AA0017D418 /* ZUXView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZUXView.m; path = views/ZUXView.m; sourceTree = "<group>"; };
+		6A62CBF11AEE04680017D418 /* zconstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zconstant.h; sourceTree = "<group>"; };
+		6A62CBF21AEE5A740017D418 /* NSNumber+ZUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSNumber+ZUX.h"; path = "categories/foundation/NSNumber+ZUX.h"; sourceTree = "<group>"; };
+		6A62CBF31AEE5A740017D418 /* NSNumber+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSNumber+ZUX.m"; path = "categories/foundation/NSNumber+ZUX.m"; sourceTree = "<group>"; };
+		6A62CBF51AEE5E780017D418 /* zutilsX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zutilsX.h; sourceTree = "<group>"; };
+		6A62CBF61AEE65400017D418 /* NSArray+ZUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+ZUX.h"; path = "categories/foundation/NSArray+ZUX.h"; sourceTree = "<group>"; };
+		6A62CBF71AEE65400017D418 /* NSArray+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+ZUX.m"; path = "categories/foundation/NSArray+ZUX.m"; sourceTree = "<group>"; };
+		6A62CBF91AEE65BC0017D418 /* NSDictionary+ZUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+ZUX.h"; path = "categories/foundation/NSDictionary+ZUX.h"; sourceTree = "<group>"; };
+		6A62CBFA1AEE65BC0017D418 /* NSDictionary+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+ZUX.m"; path = "categories/foundation/NSDictionary+ZUX.m"; sourceTree = "<group>"; };
+		6A62CBFD1AEE810A0017D418 /* NSObject+ZUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+ZUX.h"; path = "categories/foundation/NSObject+ZUX.h"; sourceTree = "<group>"; };
+		6A62CBFE1AEE810A0017D418 /* NSObject+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+ZUX.m"; path = "categories/foundation/NSObject+ZUX.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,7 +100,10 @@
 		6A62CBB71AEDDA7A0017D418 /* zutilsX */ = {
 			isa = PBXGroup;
 			children = (
-				6A62CBDE1AEDDC380017D418 /* New Group */,
+				6A62CBE11AEDDEF50017D418 /* views */,
+				6A62CBDE1AEDDC380017D418 /* categories */,
+				6A62CBF51AEE5E780017D418 /* zutilsX.h */,
+				6A62CBF11AEE04680017D418 /* zconstant.h */,
 				6A62CBBC1AEDDA7A0017D418 /* AppDelegate.h */,
 				6A62CBBD1AEDDA7A0017D418 /* AppDelegate.m */,
 				6A62CBBF1AEDDA7A0017D418 /* ViewController.h */,
@@ -114,11 +140,48 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		6A62CBDE1AEDDC380017D418 /* New Group */ = {
+		6A62CBDE1AEDDC380017D418 /* categories */ = {
 			isa = PBXGroup;
 			children = (
+				6A62CBE41AEDDF490017D418 /* foundation */,
+				6A62CBE31AEDDF460017D418 /* uikit */,
 			);
-			name = "New Group";
+			name = categories;
+			sourceTree = "<group>";
+		};
+		6A62CBE11AEDDEF50017D418 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				6A62CBEB1AEDE1AA0017D418 /* ZUXView.h */,
+				6A62CBEC1AEDE1AA0017D418 /* ZUXView.m */,
+			);
+			name = views;
+			sourceTree = "<group>";
+		};
+		6A62CBE31AEDDF460017D418 /* uikit */ = {
+			isa = PBXGroup;
+			children = (
+				6A62CBE81AEDE02D0017D418 /* UIView+ZUX.h */,
+				6A62CBE91AEDE02D0017D418 /* UIView+ZUX.m */,
+			);
+			name = uikit;
+			sourceTree = "<group>";
+		};
+		6A62CBE41AEDDF490017D418 /* foundation */ = {
+			isa = PBXGroup;
+			children = (
+				6A62CBFD1AEE810A0017D418 /* NSObject+ZUX.h */,
+				6A62CBFE1AEE810A0017D418 /* NSObject+ZUX.m */,
+				6A62CBE51AEDDF970017D418 /* NSNull+ZUX.h */,
+				6A62CBE61AEDDF970017D418 /* NSNull+ZUX.m */,
+				6A62CBF21AEE5A740017D418 /* NSNumber+ZUX.h */,
+				6A62CBF31AEE5A740017D418 /* NSNumber+ZUX.m */,
+				6A62CBF61AEE65400017D418 /* NSArray+ZUX.h */,
+				6A62CBF71AEE65400017D418 /* NSArray+ZUX.m */,
+				6A62CBF91AEE65BC0017D418 /* NSDictionary+ZUX.h */,
+				6A62CBFA1AEE65BC0017D418 /* NSDictionary+ZUX.m */,
+			);
+			name = foundation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,8 +282,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A62CBED1AEDE1AA0017D418 /* ZUXView.m in Sources */,
 				6A62CBC11AEDDA7A0017D418 /* ViewController.m in Sources */,
+				6A62CBFF1AEE810A0017D418 /* NSObject+ZUX.m in Sources */,
+				6A62CBF81AEE65400017D418 /* NSArray+ZUX.m in Sources */,
+				6A62CBE71AEDDF970017D418 /* NSNull+ZUX.m in Sources */,
+				6A62CBEA1AEDE02D0017D418 /* UIView+ZUX.m in Sources */,
+				6A62CBF41AEE5A740017D418 /* NSNumber+ZUX.m in Sources */,
 				6A62CBBE1AEDDA7A0017D418 /* AppDelegate.m in Sources */,
+				6A62CBFB1AEE65BC0017D418 /* NSDictionary+ZUX.m in Sources */,
 				6A62CBBB1AEDDA7A0017D418 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -403,6 +473,7 @@
 				6A62CBDA1AEDDA7A0017D418 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6A62CBDB1AEDDA7A0017D418 /* Build configuration list for PBXNativeTarget "zutilsXTests" */ = {
 			isa = XCConfigurationList;
@@ -411,6 +482,7 @@
 				6A62CBDD1AEDDA7A0017D418 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
