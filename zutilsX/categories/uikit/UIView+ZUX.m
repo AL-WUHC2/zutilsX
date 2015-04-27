@@ -140,6 +140,8 @@ CGRect rectRelativeFromViewByDimensionsDictionary(UIView *relativeView, NSDictio
         objc_setAssociatedObject(self, zLayoutRelativeViewKey, view, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
         objc_setAssociatedObject(self, zLayoutDimensionsDictionaryKey, dimensions, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
         
+        [view addObserver:self forKeyPath:@"frame"
+                  options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial context:nil];
         [view addObserver:self forKeyPath:@"bounds"
                   options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial context:nil];
     }
@@ -147,6 +149,7 @@ CGRect rectRelativeFromViewByDimensionsDictionary(UIView *relativeView, NSDictio
 }
 
 - (void)zuxDealloc {
+    [objc_getAssociatedObject(self, zLayoutRelativeViewKey) removeObserver:self forKeyPath:@"frame"];
     [objc_getAssociatedObject(self, zLayoutRelativeViewKey) removeObserver:self forKeyPath:@"bounds"];
     
     [self zuxDealloc];
@@ -154,7 +157,7 @@ CGRect rectRelativeFromViewByDimensionsDictionary(UIView *relativeView, NSDictio
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     UIView *relativeView = objc_getAssociatedObject(self, zLayoutRelativeViewKey);
-    if ([relativeView isEqual:object] && [@"bounds" isEqualToString:keyPath]) {
+    if ([relativeView isEqual:object] && ([@"frame" isEqualToString:keyPath] || [@"bounds" isEqualToString:keyPath])) {
         NSDictionary *dimensions = objc_getAssociatedObject(self, zLayoutDimensionsDictionaryKey);
         self.frame = rectRelativeFromViewByDimensionsDictionary(relativeView, dimensions);
     }
