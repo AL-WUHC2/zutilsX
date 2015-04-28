@@ -39,12 +39,20 @@ ZUX_EXTERN NSString *const zBottomMargin;
 
 @interface UIView (ZUXAutoLayout)
 
-- (ZUX_INSTANCETYPE)initWithRelativeView:(UIView *)view autolayoutByDimensionDictionary:(NSDictionary *)dimensions;
+@property (retain, nonatomic) id zLeftMargin;
+@property (retain, nonatomic) id zWidth;
+@property (retain, nonatomic) id zRightMargin;
+
+@property (retain, nonatomic) id zTopMargin;
+@property (retain, nonatomic) id zHeight;
+@property (retain, nonatomic) id zBottomMargin;
+
+- (ZUX_INSTANCETYPE)initWithAutolayoutDimensionDictionary:(NSDictionary *)dimensions;
 
 @end // UIView (ZUXAutoLayout) end
 
 #if NS_BLOCKS_AVAILABLE
-typedef CGFloat (^ZUXDimensionBlock)(UIView *relativeView);
+typedef CGFloat (^ZUXDimensionBlock)(UIView *superview);
 #endif
 
 @interface ZUXDimension : NSObject
