@@ -39,12 +39,14 @@
 - UIView+ZUX
 
   添加属性: maskToBounds, cornerRadius, borderWidth, borderColor, shadowColor, shadowOpacity, shadowOffset, shadowSize.
-  
-  -initWithRelativeView:autolayoutByDimensionDictionary:
-  构造自适应UIView, 依据RelativeView.bounds自适应frame, dimensionDictionary中可设置zLeftMargin, zWidth, zRightMargin, zTopMargin, zHeight, zBottomMargin. 适应方式为: 同一维度上的三个值至少需要设置其二, 根据leftMargin&width&rightMargin计算frame.origin.x&frame.size.width, 根据topMargin&height&bottomMargin计算frame.origin.y&frame.size.height. 当同一维度上三个值都设置时, width&height保持原始设置值, margin按比例进行缩放以适应RelativeView.bounds.
+
+  添加属性: zLeftMargin, zWidth, zRightMargin, zTopMargin, zHeight, zBottomMargin.
+
+  -initWithAutolayoutDimensionDictionary:
+  构造自适应UIView, 依据superview.bounds自适应frame, dimensionDictionary中可设置zLeftMargin, zWidth, zRightMargin, zTopMargin, zHeight, zBottomMargin. 适应方式为: 同一维度上的三个值至少需要设置其二, 根据leftMargin&width&rightMargin计算frame.origin.x&frame.size.width, 根据topMargin&height&bottomMargin计算frame.origin.y&frame.size.height. 当同一维度上三个值都设置时, width&height保持原始设置值, margin按比例进行缩放以适应superview.bounds.
 
   ZUXDimension类
-  依据RelativeView设定可变布局, 当RelativeView.bounds值发生变化时可自动调整布局.
+  依据superview设定可变布局, 当superview.bounds值发生变化时可自动调整布局.
 
 #####View
 
