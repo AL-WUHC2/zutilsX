@@ -269,6 +269,8 @@ void transformOriginAndSize(UIView *superview, CGFloat superviewSize,
     CGFloat margin2 = transformValue(superview, marginTransform2);
     *resultSize = sizeTransform ? transformValue(superview, sizeTransform) : superviewSize - margin1 - margin2;
     
+    if (!marginTransform1 && marginTransform2) margin1 = superviewSize - *resultSize - margin2;
+    if (!marginTransform2 && marginTransform1) margin2 = superviewSize - *resultSize - margin1;
     // adjust origin:
     // SS           : superviewSize
     // S            : size

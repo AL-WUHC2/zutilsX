@@ -12,7 +12,8 @@
 @implementation ZUXView
 
 - (ZUX_INSTANCETYPE)init {
-    return [self initWithFrame:CGRectZero];
+    if (self = [super init]) [self zuxInitial];
+    return self;
 }
 
 - (ZUX_INSTANCETYPE)initWithCoder:(NSCoder *)aDecoder {
