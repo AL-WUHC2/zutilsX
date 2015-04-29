@@ -10,6 +10,8 @@
 
 @interface NSDictionary (ZUX)
 
+- (NSDictionary *)deepCopy NS_RETURNS_RETAINED;
+
 - (NSMutableDictionary *)deepMutableCopy NS_RETURNS_RETAINED;
 
 - (id)valueForKey:(NSString *)key defaultValue:(id)defaultValue;

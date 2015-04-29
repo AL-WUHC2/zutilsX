@@ -11,8 +11,12 @@
 
 @implementation NSDictionary (ZUX)
 
+- (NSDictionary *)deepCopy {
+    return [[NSDictionary alloc] initWithDictionary:self copyItems:YES];
+}
+
 - (NSMutableDictionary *)deepMutableCopy {
-    return (NSMutableDictionary *)CFPropertyListCreateDeepCopy(kCFAllocatorDefault, (CFDictionaryRef)self, kCFPropertyListMutableContainers);
+    return [[NSMutableDictionary alloc] initWithDictionary:self copyItems:YES];
 }
 
 - (id)valueForKey:(NSString *)key defaultValue:(id)defaultValue {

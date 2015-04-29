@@ -19,6 +19,7 @@
 		6A62CBF81AEE65400017D418 /* NSArray+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A62CBF71AEE65400017D418 /* NSArray+ZUX.m */; };
 		6A62CBFB1AEE65BC0017D418 /* NSDictionary+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A62CBFA1AEE65BC0017D418 /* NSDictionary+ZUX.m */; };
 		6A62CBFF1AEE810A0017D418 /* NSObject+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A62CBFE1AEE810A0017D418 /* NSObject+ZUX.m */; };
+		6ADE83F41AF07ADA00214B21 /* ZUXTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ADE83F31AF07ADA00214B21 /* ZUXTransform.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,8 @@
 		6A62CBFA1AEE65BC0017D418 /* NSDictionary+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+ZUX.m"; path = "categories/foundation/NSDictionary+ZUX.m"; sourceTree = "<group>"; };
 		6A62CBFD1AEE810A0017D418 /* NSObject+ZUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+ZUX.h"; path = "categories/foundation/NSObject+ZUX.h"; sourceTree = "<group>"; };
 		6A62CBFE1AEE810A0017D418 /* NSObject+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+ZUX.m"; path = "categories/foundation/NSObject+ZUX.m"; sourceTree = "<group>"; };
+		6ADE83F21AF07ADA00214B21 /* ZUXTransform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZUXTransform.h; path = entities/ZUXTransform.h; sourceTree = "<group>"; };
+		6ADE83F31AF07ADA00214B21 /* ZUXTransform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZUXTransform.m; path = entities/ZUXTransform.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +105,7 @@
 			children = (
 				6A62CBE11AEDDEF50017D418 /* views */,
 				6A62CBDE1AEDDC380017D418 /* categories */,
+				6ADE83EE1AF07A4C00214B21 /* entities */,
 				6A62CBF51AEE5E780017D418 /* zutilsX.h */,
 				6A62CBF11AEE04680017D418 /* zconstant.h */,
 				6A62CBBC1AEDDA7A0017D418 /* AppDelegate.h */,
@@ -182,6 +186,15 @@
 				6A62CBFA1AEE65BC0017D418 /* NSDictionary+ZUX.m */,
 			);
 			name = foundation;
+			sourceTree = "<group>";
+		};
+		6ADE83EE1AF07A4C00214B21 /* entities */ = {
+			isa = PBXGroup;
+			children = (
+				6ADE83F21AF07ADA00214B21 /* ZUXTransform.h */,
+				6ADE83F31AF07ADA00214B21 /* ZUXTransform.m */,
+			);
+			name = entities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -288,6 +301,7 @@
 				6A62CBF81AEE65400017D418 /* NSArray+ZUX.m in Sources */,
 				6A62CBE71AEDDF970017D418 /* NSNull+ZUX.m in Sources */,
 				6A62CBEA1AEDE02D0017D418 /* UIView+ZUX.m in Sources */,
+				6ADE83F41AF07ADA00214B21 /* ZUXTransform.m in Sources */,
 				6A62CBF41AEE5A740017D418 /* NSNumber+ZUX.m in Sources */,
 				6A62CBBE1AEDDA7A0017D418 /* AppDelegate.m in Sources */,
 				6A62CBFB1AEE65BC0017D418 /* NSDictionary+ZUX.m in Sources */,

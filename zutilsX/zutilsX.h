@@ -11,6 +11,8 @@
 
 #import "zconstant.h"
 
+#import "ZUXView.h"
+
 #import "NSObject+ZUX.h"
 #import "NSNull+ZUX.h"
 #import "NSNumber+ZUX.h"
@@ -19,6 +21,6 @@
 
 #import "UIView+ZUX.h"
 
-#import "ZUXView.h"
+#import "ZUXTransform.h"
 
 #endif

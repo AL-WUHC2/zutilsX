@@ -10,6 +10,8 @@
 
 @interface NSArray (ZUX)
 
+- (NSArray *)deepCopy NS_RETURNS_RETAINED;
+
 - (NSMutableArray *)deepMutableCopy NS_RETURNS_RETAINED;
 
 - (id)objectAtIndex:(NSUInteger)index defaultValue:(id)defaultValue;

@@ -10,6 +10,8 @@
 #import "NSObject+ZUX.h"
 #import "NSNumber+ZUX.h"
 #import "NSDictionary+ZUX.h"
+#import "ZUXTransform.h"
+#import <objc/runtime.h>
 
 @implementation UIView (ZUX)
 
@@ -79,13 +81,22 @@
 
 @end // UIView (ZUX) end
 
-NSString *const zLayoutDimensionsDictionaryKey  = @"ZLayoutDimensionsDictionaryKey";
+NSString *const zLayoutTransformsDictionaryKey  = @"ZLayoutTransformsDictionaryKey";
+
 NSString *const zLayoutKVOContext               = @"ZLayoutKVOContext";
+NSString *const zTransformsKVOKey               = @"zTransforms";
+NSString *const zLeftMarginKVOKey               = @"ZLeftMargin";
+NSString *const zWidthKVOKey                    = @"ZWidth";
+NSString *const zRightMarginKVOKey              = @"ZRightMargin";
+NSString *const zTopMarginKVOKey                = @"ZTopMargin";
+NSString *const zHeightKVOKey                   = @"ZHeight";
+NSString *const zBottomMarginKVOKey             = @"ZBottomMargin";
+NSString *const zSuperviewFrameKVOKey           = @"frame";
+NSString *const zSuperviewBoundsKVOKey          = @"bounds";
 
 NSString *const zLeftMargin                     = @"ZLeftMargin";
 NSString *const zWidth                          = @"ZWidth";
 NSString *const zRightMargin                    = @"ZRightMargin";
-
 NSString *const zTopMargin                      = @"ZTopMargin";
 NSString *const zHeight                         = @"ZHeight";
 NSString *const zBottomMargin                   = @"ZBottomMargin";
@@ -94,23 +105,22 @@ NSString *const zBottomMargin                   = @"ZBottomMargin";
 
 + (void)load {
     [super load];
+    // observe superview change
     [self swizzleOriSelector:@selector(willMoveToSuperview:)
              withNewSelector:@selector(zuxWillMoveToSuperview:)];
+    // dealloc with removeObserver
     [self swizzleOriSelector:@selector(dealloc)
              withNewSelector:@selector(zuxDealloc)];
 }
 
-- (ZUX_INSTANCETYPE)initWithAutolayoutDimensionDictionary:(NSDictionary *)dimensions {
+- (ZUX_INSTANCETYPE)initWithTransformDictionary:(NSDictionary *)transforms {
     [self init];
     
-    [self setZLayoutDimensionsDictionary:dimensions];
-    
-    [self.superview addObserver:self forKeyPath:@"frame"
-                        options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial
-                        context:zLayoutKVOContext];
-    [self.superview addObserver:self forKeyPath:@"bounds"
-                        options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial
-                        context:zLayoutKVOContext];
+    [self setZTransforms:transforms];
+    [self addObserver:self forKeyPath:zTransformsKVOKey
+              options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial
+              context:zLayoutKVOContext];
+    [self p_AddFrameAndBoundsObserversToView:self.superview];
     
     return self;
 }
@@ -118,26 +128,15 @@ NSString *const zBottomMargin                   = @"ZBottomMargin";
 - (void)zuxWillMoveToSuperview:(UIView *)newSuperview {
     [self zuxWillMoveToSuperview:newSuperview];
     
-    [self.superview removeObserver:self forKeyPath:@"frame"
-                           context:zLayoutKVOContext];
-    [self.superview removeObserver:self forKeyPath:@"bounds"
-                           context:zLayoutKVOContext];
-    
-    [newSuperview addObserver:self forKeyPath:@"frame"
-                      options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial
-                      context:zLayoutKVOContext];
-    [newSuperview addObserver:self forKeyPath:@"bounds"
-                      options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial
-                      context:zLayoutKVOContext];
+    [self p_RemoveFrameAndBoundsObserversFromView:self.superview];
+    [self p_AddFrameAndBoundsObserversToView:newSuperview];
 }
 
 - (void)zuxDealloc {
-    [self setZLayoutDimensionsDictionary:nil];
-    
-    [self.superview removeObserver:self forKeyPath:@"frame"
-                           context:zLayoutKVOContext];
-    [self.superview removeObserver:self forKeyPath:@"bounds"
-                           context:zLayoutKVOContext];
+    [self p_RemoveFrameAndBoundsObserversFromView:self.superview];
+    [self removeObserver:self forKeyPath:zTransformsKVOKey
+                 context:zLayoutKVOContext];
+    [self setZTransforms:nil];
     
     [self zuxDealloc];
 }
@@ -147,173 +146,181 @@ NSString *const zBottomMargin                   = @"ZBottomMargin";
     if (![zLayoutKVOContext isEqual:context]) [super observeValueForKeyPath:keyPath ofObject:object
                                                                      change:change context:context];
     
-    NSDictionary *dimensions = objc_getAssociatedObject(self, zLayoutDimensionsDictionaryKey);
-    if (!self.superview || !dimensions || dimensions.count < 4) return;
+    NSDictionary *transforms = objc_getAssociatedObject(self, zLayoutTransformsDictionaryKey);
+    if (!self.superview || !transforms || transforms.count < 4) return;
     
-    if (([self.superview isEqual:object] && [@[@"frame", @"bounds"] containsObject:keyPath]) ||
-        ([dimensions isEqual:object] && [@[@"zLeftMargin", @"zWidth", @"zRightMargin", @"zTopMargin", @"zHeight", @"zBottomMargin"] containsObject:keyPath])) {
-        self.frame = rectRelativeFromViewByDimensionsDictionary(self.superview, dimensions);
+    if (([self.superview isEqual:object] && [@[zSuperviewFrameKVOKey, zSuperviewBoundsKVOKey] containsObject:keyPath]) ||
+        ([self isEqual:object] && [zTransformsKVOKey isEqualToString:keyPath]) ||
+        ([transforms isEqual:object] && [@[zLeftMarginKVOKey, zWidthKVOKey, zRightMarginKVOKey,
+                                           zTopMarginKVOKey, zHeightKVOKey, zBottomMarginKVOKey] containsObject:keyPath])) {
+        self.frame = rectTransformFromSuperView(self.superview, transforms);
     }
 }
 
-- (NSMutableDictionary *)zLayoutDimensionsDictionary {
-    if (!objc_getAssociatedObject(self, zLayoutDimensionsDictionaryKey)) {
-        [self setZLayoutDimensionsDictionary:@{}];
+- (NSDictionary *)zTransforms {
+    if (!objc_getAssociatedObject(self, zLayoutTransformsDictionaryKey)) {
+        [self setZTransforms:@{}];
     }
-    return objc_getAssociatedObject(self, zLayoutDimensionsDictionaryKey);
+    return objc_getAssociatedObject(self, zLayoutTransformsDictionaryKey);
 }
 
-- (void)setZLayoutDimensionsDictionary:(NSDictionary *)newDimensions {
-    NSDictionary *oriDimensions = objc_getAssociatedObject(self, zLayoutDimensionsDictionaryKey);
-    [oriDimensions removeObserver:self forKeyPath:@"zLeftMargin"
+- (void)setZTransforms:(NSDictionary *)zTransforms {
+    NSDictionary *oriTransforms = objc_getAssociatedObject(self, zLayoutTransformsDictionaryKey);
+    [oriTransforms removeObserver:self forKeyPath:zLeftMarginKVOKey
                           context:zLayoutKVOContext];
-    [oriDimensions removeObserver:self forKeyPath:@"zWidth"
+    [oriTransforms removeObserver:self forKeyPath:zWidthKVOKey
                           context:zLayoutKVOContext];
-    [oriDimensions removeObserver:self forKeyPath:@"zRightMargin"
+    [oriTransforms removeObserver:self forKeyPath:zRightMarginKVOKey
                           context:zLayoutKVOContext];
-    [oriDimensions removeObserver:self forKeyPath:@"zTopMargin"
+    [oriTransforms removeObserver:self forKeyPath:zTopMarginKVOKey
                           context:zLayoutKVOContext];
-    [oriDimensions removeObserver:self forKeyPath:@"zHeight"
+    [oriTransforms removeObserver:self forKeyPath:zHeightKVOKey
                           context:zLayoutKVOContext];
-    [oriDimensions removeObserver:self forKeyPath:@"zBottomMargin"
+    [oriTransforms removeObserver:self forKeyPath:zBottomMarginKVOKey
                           context:zLayoutKVOContext];
     
-    if (!newDimensions) return;
+    if (!zTransforms) return;
     
-    NSMutableDictionary *mutableDimensions = [NSMutableDictionary dictionaryWithDictionary:newDimensions];
-    objc_setAssociatedObject(self, zLayoutDimensionsDictionaryKey, mutableDimensions,
+    NSMutableDictionary *transforms = [[zTransforms deepMutableCopy] autorelease];
+    objc_setAssociatedObject(self, zLayoutTransformsDictionaryKey, transforms,
                              OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    [mutableDimensions addObserver:self forKeyPath:@"zLeftMargin"
-                           options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial
-                           context:zLayoutKVOContext];
-    [mutableDimensions addObserver:self forKeyPath:@"zWidth"
-                           options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial
-                           context:zLayoutKVOContext];
-    [mutableDimensions addObserver:self forKeyPath:@"zRightMargin"
-                           options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial
-                           context:zLayoutKVOContext];
-    [mutableDimensions addObserver:self forKeyPath:@"zTopMargin"
-                           options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial
-                           context:zLayoutKVOContext];
-    [mutableDimensions addObserver:self forKeyPath:@"zHeight"
-                           options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial
-                           context:zLayoutKVOContext];
-    [mutableDimensions addObserver:self forKeyPath:@"zBottomMargin"
-                           options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial
-                           context:zLayoutKVOContext];
+    [transforms addObserver:self forKeyPath:zLeftMarginKVOKey
+                    options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial
+                    context:zLayoutKVOContext];
+    [transforms addObserver:self forKeyPath:zWidthKVOKey
+                    options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial
+                    context:zLayoutKVOContext];
+    [transforms addObserver:self forKeyPath:zRightMarginKVOKey
+                    options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial
+                    context:zLayoutKVOContext];
+    [transforms addObserver:self forKeyPath:zTopMarginKVOKey
+                    options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial
+                    context:zLayoutKVOContext];
+    [transforms addObserver:self forKeyPath:zHeightKVOKey
+                    options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial
+                    context:zLayoutKVOContext];
+    [transforms addObserver:self forKeyPath:zBottomMarginKVOKey
+                    options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial
+                    context:zLayoutKVOContext];
 }
 
 - (id)zLeftMargin {
-    return [[self zLayoutDimensionsDictionary] objectForKey:zLeftMargin];
+    return self.zTransforms[zLeftMargin];
 }
 
 - (void)setZLeftMargin:(id)zLeftMarginValue {
-    [[self zLayoutDimensionsDictionary] setObject:zLeftMarginValue forKey:zLeftMargin];
+    [self p_MutableZTransforms][zLeftMargin] = [[zLeftMarginValue copy] autorelease];
 }
 
 - (id)zWidth {
-    return [[self zLayoutDimensionsDictionary] objectForKey:zWidth];
+    return self.zTransforms[zWidth];
 }
 
 - (void)setZWidth:(id)zWidthValue {
-    [[self zLayoutDimensionsDictionary] setObject:zWidthValue forKey:zWidth];
+    [self p_MutableZTransforms][zWidth] = [[zWidthValue copy] autorelease];
 }
 
 - (id)zRightMargin {
-    return [[self zLayoutDimensionsDictionary] objectForKey:zRightMargin];
+    return self.zTransforms[zRightMargin];
 }
 
 - (void)setZRightMargin:(id)zRightMarginValue {
-    [[self zLayoutDimensionsDictionary] setObject:zRightMarginValue forKey:zRightMargin];
+    [self p_MutableZTransforms][zRightMargin] = [[zRightMarginValue copy] autorelease];
 }
 
 - (id)zTopMargin {
-    return [[self zLayoutDimensionsDictionary] objectForKey:zTopMargin];
+    return self.zTransforms[zTopMargin];
 }
 
 - (void)setZTopMargin:(id)zTopMarginValue {
-    [[self zLayoutDimensionsDictionary] setObject:zTopMarginValue forKey:zTopMargin];
+    [self p_MutableZTransforms][zTopMargin] = [[zTopMarginValue copy] autorelease];
 }
 
 - (id)zHeight {
-    return [[self zLayoutDimensionsDictionary] objectForKey:zHeight];
+    return self.zTransforms[zHeight];
 }
 
 - (void)setZHeight:(id)zHeightValue {
-    [[self zLayoutDimensionsDictionary] setObject:zHeightValue forKey:zHeight];
+    [self p_MutableZTransforms][zHeight] = [[zHeightValue copy] autorelease];
 }
 
 - (id)zBottomMargin {
-    return [[self zLayoutDimensionsDictionary] objectForKey:zBottomMargin];
+    return self.zTransforms[zBottomMargin];
 }
 
 - (void)setZBottomMargin:(id)zBottomMarginValue {
-    [[self zLayoutDimensionsDictionary] setObject:zBottomMarginValue forKey:zBottomMargin];
+    [self p_MutableZTransforms][zBottomMargin] = [[zBottomMarginValue copy] autorelease];
 }
 
-#pragma mark - autolayout implement Methods.
+#pragma mark - Autolayout Implement Methods.
 
-CGFloat dimensionValue(UIView *superview, id dimension) {
-    if ([dimension isKindOfClass:[NSNumber class]]) {
-        return [(NSNumber *)dimension cgfloatValue];
-    } else if ([dimension isKindOfClass:[ZUXDimension class]]) {
-        ZUXDimensionBlock block = [(ZUXDimension *)dimension block];
-        return block && superview ? block(superview) : 0;
+CGFloat transformValue(UIView *superview, id transform) {
+    if ([transform isKindOfClass:[NSNumber class]]) {
+        return [(NSNumber *)transform cgfloatValue];
+    } else if ([transform isKindOfClass:[ZUXTransform class]]) {
+        ZUXTransformBlock block = [(ZUXTransform *)transform block];
+        NSCAssert(block, @"ZUXTransformBlock Undefined.");
+        return superview ? block(superview) : 0;
+    } else if (transform == nil) {
+        return 0;
     }
+    NSCAssert(false, @"Transform Type Unrecognized.");
     return 0;
 }
 
-void calculateOriginAndSize(UIView *superview, CGFloat relativeSize,
-                            id dimensionSize, id dimensionMargin1, id dimensionMargin2,
+void transformOriginAndSize(UIView *superview, CGFloat superviewSize,
+                            id marginTransform1, id sizeTransform, id marginTransform2,
                             CGFloat *resultOrigin, CGFloat *resultSize) {
-    CGFloat sizeValue = dimensionValue(superview, dimensionSize);
-    CGFloat marginValue1 = dimensionValue(superview, dimensionMargin1);
-    CGFloat marginValue2 = dimensionValue(superview, dimensionMargin2);
-    *resultSize = dimensionSize ? sizeValue : relativeSize - marginValue1 - marginValue2;
+    CGFloat margin1 = transformValue(superview, marginTransform1);
+    CGFloat margin2 = transformValue(superview, marginTransform2);
+    *resultSize = sizeTransform ? transformValue(superview, sizeTransform) : superviewSize - margin1 - margin2;
     
-    if (!dimensionMargin1) marginValue1 = relativeSize - sizeValue - marginValue2;
-    if (!dimensionMargin2) marginValue2 = relativeSize - sizeValue - marginValue1;
-    *resultOrigin = (relativeSize - *resultSize) * marginValue1 / (marginValue1 + marginValue2);
+    if (!marginTransform1) margin1 = superviewSize - *resultSize - margin2;
+    if (!marginTransform2) margin2 = superviewSize - *resultSize - margin1;
+    // adjust origin:
+    // capacity     = SS - m1 - m2;
+    // center       = capacity / 2 + m1
+    //              = (SS + m1 - m2) / 2;
+    // leftCoord    = center - S / 2
+    //              = (SS + m1 - m2 - S) / 2;
+    *resultOrigin = (superviewSize + margin1 - margin2 - *resultSize) / 2;
 }
 
-CGRect rectRelativeFromViewByDimensionsDictionary(UIView *superview, NSDictionary *dimensions) {
-    NSDictionary *xDimensions = [dimensions subDictionaryForKeys:@[zLeftMargin, zWidth, zRightMargin]];
-    NSDictionary *yDimensions = [dimensions subDictionaryForKeys:@[zTopMargin, zHeight, zBottomMargin]];
-    NSCParameterAssert(xDimensions.count > 1 && yDimensions.count > 1);
+CGRect rectTransformFromSuperView(UIView *superview, NSDictionary *transforms) {
+    NSDictionary *xTransforms = [transforms subDictionaryForKeys:@[zLeftMargin, zWidth, zRightMargin]];
+    NSDictionary *yTransforms = [transforms subDictionaryForKeys:@[zTopMargin, zHeight, zBottomMargin]];
+    NSCAssert(xTransforms.count > 1 && yTransforms.count > 1, @"Transform parameters not enough.");
     
     CGRect result = CGRectZero;
-    calculateOriginAndSize(superview, superview.bounds.size.width,
-                           xDimensions[zWidth], xDimensions[zLeftMargin], xDimensions[zRightMargin],
+    transformOriginAndSize(superview, superview.bounds.size.width,
+                           xTransforms[zLeftMargin], xTransforms[zWidth], xTransforms[zRightMargin],
                            &result.origin.x, &result.size.width);
-    calculateOriginAndSize(superview, superview.bounds.size.height,
-                           yDimensions[zHeight], yDimensions[zTopMargin], yDimensions[zBottomMargin],
+    transformOriginAndSize(superview, superview.bounds.size.height,
+                           yTransforms[zTopMargin], yTransforms[zHeight], yTransforms[zBottomMargin],
                            &result.origin.y, &result.size.height);
     return result;
 }
 
-#pragma mark -
+#pragma mark - Private Methods.
+
+- (NSMutableDictionary *)p_MutableZTransforms {
+    return (NSMutableDictionary *)self.zTransforms;
+}
+
+- (void)p_AddFrameAndBoundsObserversToView:(UIView *)view {
+    [view addObserver:self forKeyPath:zSuperviewFrameKVOKey
+              options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial
+              context:zLayoutKVOContext];
+    [view addObserver:self forKeyPath:zSuperviewBoundsKVOKey
+              options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial
+              context:zLayoutKVOContext];
+}
+
+- (void)p_RemoveFrameAndBoundsObserversFromView:(UIView *)view {
+    [view removeObserver:self forKeyPath:zSuperviewFrameKVOKey
+                 context:zLayoutKVOContext];
+    [view removeObserver:self forKeyPath:zSuperviewBoundsKVOKey
+                 context:zLayoutKVOContext];
+}
 
 @end // UIView (ZUXAutoLayout) end
-
-@implementation ZUXDimension
-
-+ (ZUX_INSTANCETYPE)dimensionWithBlock:(CGFloat (^)(UIView *relativeView))block {
-    return [[[self alloc] initWithBlock:block] autorelease];
-}
-
-- (ZUX_INSTANCETYPE)init {
-    if (self = [super init]) _block = nil;
-    return self;
-}
-
-- (ZUX_INSTANCETYPE)initWithBlock:(CGFloat (^)(UIView *relativeView))block {
-    if (self = [super init]) _block = Block_copy(block);
-    return self;
-}
-
-- (void)dealloc {
-    if (_block) Block_release(_block);
-    [super dealloc];
-}
-
-@end

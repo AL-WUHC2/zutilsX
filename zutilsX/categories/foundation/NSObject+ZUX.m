@@ -7,6 +7,7 @@
 //
 
 #import "NSObject+ZUX.h"
+#import <objc/runtime.h>
 
 @implementation NSObject (ZUX)
 

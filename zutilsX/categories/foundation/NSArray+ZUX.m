@@ -11,8 +11,12 @@
 
 @implementation NSArray (ZUX)
 
+- (NSArray *)deepCopy {
+    return [[NSArray alloc] initWithArray:self copyItems:YES];
+}
+
 - (NSMutableArray *)deepMutableCopy {
-    return (NSMutableArray *)CFPropertyListCreateDeepCopy(kCFAllocatorDefault, (CFArrayRef)self, kCFPropertyListMutableContainers);
+    return [[NSMutableArray alloc] initWithArray:self copyItems:YES];
 }
 
 - (id)objectAtIndex:(NSUInteger)index defaultValue:(id)defaultValue {

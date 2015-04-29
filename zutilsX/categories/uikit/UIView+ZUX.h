@@ -32,35 +32,21 @@
 ZUX_EXTERN NSString *const zLeftMargin;
 ZUX_EXTERN NSString *const zWidth;
 ZUX_EXTERN NSString *const zRightMargin;
-
 ZUX_EXTERN NSString *const zTopMargin;
 ZUX_EXTERN NSString *const zHeight;
 ZUX_EXTERN NSString *const zBottomMargin;
 
 @interface UIView (ZUXAutoLayout)
 
-@property (retain, nonatomic) id zLeftMargin;
-@property (retain, nonatomic) id zWidth;
-@property (retain, nonatomic) id zRightMargin;
+@property (copy, nonatomic) NSDictionary *zTransforms; // animatable.
 
-@property (retain, nonatomic) id zTopMargin;
-@property (retain, nonatomic) id zHeight;
-@property (retain, nonatomic) id zBottomMargin;
+@property (copy, nonatomic) id zLeftMargin; // animatable.
+@property (copy, nonatomic) id zWidth; // animatable.
+@property (copy, nonatomic) id zRightMargin; // animatable.
+@property (copy, nonatomic) id zTopMargin; // animatable.
+@property (copy, nonatomic) id zHeight; // animatable.
+@property (copy, nonatomic) id zBottomMargin; // animatable.
 
-- (ZUX_INSTANCETYPE)initWithAutolayoutDimensionDictionary:(NSDictionary *)dimensions;
+- (ZUX_INSTANCETYPE)initWithTransformDictionary:(NSDictionary *)transforms;
 
 @end // UIView (ZUXAutoLayout) end
-
-#if NS_BLOCKS_AVAILABLE
-typedef CGFloat (^ZUXDimensionBlock)(UIView *superview);
-#endif
-
-@interface ZUXDimension : NSObject
-
-@property (readonly, nonatomic) ZUXDimensionBlock block;
-
-+ (id)dimensionWithBlock:(ZUXDimensionBlock)block;
-
-- (id)initWithBlock:(ZUXDimensionBlock)block;
-
-@end // ZUXDimension end

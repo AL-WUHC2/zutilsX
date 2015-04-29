@@ -18,29 +18,32 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor grayColor];
-    NSDictionary *dimensions = @{zLeftMargin : @20,
-                                 zWidth : [ZUXDimension dimensionWithBlock:^CGFloat(UIView *superview) {
-                                     return superview.bounds.size.width / 2 - 20;
+    NSDictionary *transforms = @{zLeftMargin : @20,
+                                 zWidth : [ZUXTransform transformWithBlock:^CGFloat(UIView *superview) {
+                                     return superview.bounds.size.width / 2 - 30;
                                  }],
                                  zTopMargin : @20,
-                                 zHeight : [ZUXDimension dimensionWithBlock:^CGFloat(UIView *superview) {
-                                     return superview.bounds.size.height / 2 - 20;
+                                 zHeight : [ZUXTransform transformWithBlock:^CGFloat(UIView *superview) {
+                                     return superview.bounds.size.height / 2 - 30;
                                  }]
                                  };
-    UIView *subView = [[UIView alloc] initWithAutolayoutDimensionDictionary:dimensions];
+    UIView *subView = [[UIView alloc] initWithTransformDictionary:transforms];
     subView.backgroundColor = [UIColor darkGrayColor];
+    subView.tag = 1111;
     [self.view addSubview:subView];
     [subView release];
+    NSLog(@"%@", [self.view viewWithTag:1111].zTransforms);
     
     UIView *subView2 = [[UIView alloc] init];
     subView2.backgroundColor = [UIColor lightGrayColor];
+    subView2.tag = 2222;
     [self.view addSubview:subView2];
-    subView2.zWidth = [ZUXDimension dimensionWithBlock:^CGFloat(UIView *superview) {
-        return superview.bounds.size.width / 2 - 20;
+    subView2.zWidth = [ZUXTransform transformWithBlock:^CGFloat(UIView *superview) {
+        return superview.bounds.size.width / 2 - 30;
     }];
     subView2.zRightMargin = @20;
-    subView2.zHeight = [ZUXDimension dimensionWithBlock:^CGFloat(UIView *superview) {
-        return superview.bounds.size.height / 2 - 49;
+    subView2.zHeight = [ZUXTransform transformWithBlock:^CGFloat(UIView *superview) {
+        return superview.bounds.size.height / 2 - 59;
     }];
     subView2.zBottomMargin = @49;
     [subView2 release];
@@ -48,6 +51,16 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [UIView animateWithDuration:2 animations:^{
             self.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height / 2);
+            [self.view viewWithTag:1111].zTransforms = @{zLeftMargin : @0,
+                                                         zWidth : [ZUXTransform halfWidthTransform],
+                                                         zTopMargin : @0,
+                                                         zHeight : [ZUXTransform halfHeightTransform]
+                                                         };
+            UIView *subView2 = [self.view viewWithTag:2222];
+            subView2.zWidth = [ZUXTransform halfWidthTransform];
+            subView2.zRightMargin = @0;
+            subView2.zHeight = [ZUXTransform halfHeightTransform];
+            subView2.zBottomMargin = @0;
         }];
     });
 }
