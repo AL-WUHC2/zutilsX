@@ -278,6 +278,10 @@ void transformOriginAndSize(UIView *superview, CGFloat superviewSize,
     if (!marginTransform1) margin1 = superviewSize - *resultSize - margin2;
     if (!marginTransform2) margin2 = superviewSize - *resultSize - margin1;
     // adjust origin:
+    // SS           : superviewSize
+    // S            : size
+    // m1           : margin1
+    // m2           : margin2
     // capacity     = SS - m1 - m2;
     // center       = capacity / 2 + m1
     //              = (SS + m1 - m2) / 2;
