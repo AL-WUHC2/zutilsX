@@ -35,6 +35,10 @@
 
 #pragma mark - Some Convenience Transform.
 
++ (ZUXTransform *)nilTransform {
+    return [[[self alloc] init] autorelease];
+}
+
 + (ZUXTransform *)fullWidthTransform {
     return [self transformWithBlock:^CGFloat(UIView *superview) {
         return superview.bounds.size.width;

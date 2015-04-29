@@ -21,6 +21,8 @@ typedef CGFloat (^ZUXTransformBlock)(UIView *superview);
 
 - (ZUX_INSTANCETYPE)initWithBlock:(ZUXTransformBlock)block;
 
++ (ZUXTransform *)nilTransform;
+
 + (ZUXTransform *)fullWidthTransform;
 + (ZUXTransform *)fullHeightTransform;
 

@@ -47,7 +47,7 @@
   添加属性: zTransforms, zLeftMargin, zWidth, zRightMargin, zTopMargin, zHeight, zBottomMargin. // animatable.
 
   -initWithTransformDictionary:
-  构造自适应UIView, 依据superview.bounds自适应frame, transformDictionary中可设置zLeftMargin, zWidth, zRightMargin, zTopMargin, zHeight, zBottomMargin. 适应方式为: 同一维度上的三个值至少需要设置其二, 根据leftMargin&width&rightMargin计算frame.origin.x&frame.size.width, 根据topMargin&height&bottomMargin计算frame.origin.y&frame.size.height. 当同一维度上三个值都设置时, width&height保持原始设置值, 等量增减左右/上下margin进行缩放以适应superview.bounds(算式见UIView+ZUX.m - transformOriginAndSize(UIView*, CGFloat, id, id, id, CGFloat*, CGFloat*)).
+  构造自适应UIView, 依据superview.bounds自适应frame, transformDictionary中可设置zLeftMargin, zWidth, zRightMargin, zTopMargin, zHeight, zBottomMargin. 适应方式为: margin默认为0, width/height默认为superview的width/height减去同坐标轴上的margin, 根据leftMargin&width&rightMargin计算frame.origin.x&frame.size.width, 根据topMargin&height&bottomMargin计算frame.origin.y&frame.size.height. 当同坐标轴上的三个值都设置时, width&height保持原始设置值, 等量增减双向的margin进行缩放以适应superview.bounds(算式见UIView+ZUX.m - transformOriginAndSize(UIView*, CGFloat, id, id, id, CGFloat*, CGFloat*)).
 
 #####View
 

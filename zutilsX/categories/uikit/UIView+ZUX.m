@@ -116,10 +116,10 @@ NSString *const zBottomMargin                   = @"ZBottomMargin";
 - (ZUX_INSTANCETYPE)initWithTransformDictionary:(NSDictionary *)transforms {
     [self init];
     
-    [self setZTransforms:transforms];
     [self addObserver:self forKeyPath:zTransformsKVOKey
-              options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial
+              options:NSKeyValueObservingOptionNew
               context:zLayoutKVOContext];
+    [self setZTransforms:transforms];
     [self p_AddFrameAndBoundsObserversToView:self.superview];
     
     return self;
@@ -128,6 +128,7 @@ NSString *const zBottomMargin                   = @"ZBottomMargin";
 - (void)zuxWillMoveToSuperview:(UIView *)newSuperview {
     [self zuxWillMoveToSuperview:newSuperview];
     
+    if ([self.superview isEqual:newSuperview]) return;
     [self p_RemoveFrameAndBoundsObserversFromView:self.superview];
     [self p_AddFrameAndBoundsObserversToView:newSuperview];
 }
@@ -146,8 +147,8 @@ NSString *const zBottomMargin                   = @"ZBottomMargin";
     if (![zLayoutKVOContext isEqual:context]) [super observeValueForKeyPath:keyPath ofObject:object
                                                                      change:change context:context];
     
-    NSDictionary *transforms = objc_getAssociatedObject(self, zLayoutTransformsDictionaryKey);
-    if (!self.superview || !transforms || transforms.count < 4) return;
+    NSDictionary *transforms = self.zTransforms;
+    if (!self.superview || !transforms) return;
     
     if (([self.superview isEqual:object] && [@[zSuperviewFrameKVOKey, zSuperviewBoundsKVOKey] containsObject:keyPath]) ||
         ([self isEqual:object] && [zTransformsKVOKey isEqualToString:keyPath]) ||
@@ -158,14 +159,13 @@ NSString *const zBottomMargin                   = @"ZBottomMargin";
 }
 
 - (NSDictionary *)zTransforms {
-    if (!objc_getAssociatedObject(self, zLayoutTransformsDictionaryKey)) {
-        [self setZTransforms:@{}];
-    }
     return objc_getAssociatedObject(self, zLayoutTransformsDictionaryKey);
 }
 
 - (void)setZTransforms:(NSDictionary *)zTransforms {
     NSDictionary *oriTransforms = objc_getAssociatedObject(self, zLayoutTransformsDictionaryKey);
+    if ([oriTransforms isEqualToDictionary:zTransforms]) return;
+    
     [oriTransforms removeObserver:self forKeyPath:zLeftMarginKVOKey
                           context:zLayoutKVOContext];
     [oriTransforms removeObserver:self forKeyPath:zWidthKVOKey
@@ -179,28 +179,26 @@ NSString *const zBottomMargin                   = @"ZBottomMargin";
     [oriTransforms removeObserver:self forKeyPath:zBottomMarginKVOKey
                           context:zLayoutKVOContext];
     
-    if (!zTransforms) return;
-    
     NSMutableDictionary *transforms = [[zTransforms deepMutableCopy] autorelease];
     objc_setAssociatedObject(self, zLayoutTransformsDictionaryKey, transforms,
                              OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     [transforms addObserver:self forKeyPath:zLeftMarginKVOKey
-                    options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial
+                    options:NSKeyValueObservingOptionNew
                     context:zLayoutKVOContext];
     [transforms addObserver:self forKeyPath:zWidthKVOKey
-                    options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial
+                    options:NSKeyValueObservingOptionNew
                     context:zLayoutKVOContext];
     [transforms addObserver:self forKeyPath:zRightMarginKVOKey
-                    options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial
+                    options:NSKeyValueObservingOptionNew
                     context:zLayoutKVOContext];
     [transforms addObserver:self forKeyPath:zTopMarginKVOKey
-                    options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial
+                    options:NSKeyValueObservingOptionNew
                     context:zLayoutKVOContext];
     [transforms addObserver:self forKeyPath:zHeightKVOKey
-                    options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial
+                    options:NSKeyValueObservingOptionNew
                     context:zLayoutKVOContext];
     [transforms addObserver:self forKeyPath:zBottomMarginKVOKey
-                    options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionInitial
+                    options:NSKeyValueObservingOptionNew
                     context:zLayoutKVOContext];
 }
 
@@ -209,7 +207,7 @@ NSString *const zBottomMargin                   = @"ZBottomMargin";
 }
 
 - (void)setZLeftMargin:(id)zLeftMarginValue {
-    [self p_MutableZTransforms][zLeftMargin] = [[zLeftMarginValue copy] autorelease];
+    [self p_SettableZTransforms][zLeftMargin] = [[zLeftMarginValue copy] autorelease];
 }
 
 - (id)zWidth {
@@ -217,7 +215,7 @@ NSString *const zBottomMargin                   = @"ZBottomMargin";
 }
 
 - (void)setZWidth:(id)zWidthValue {
-    [self p_MutableZTransforms][zWidth] = [[zWidthValue copy] autorelease];
+    [self p_SettableZTransforms][zWidth] = [[zWidthValue copy] autorelease];
 }
 
 - (id)zRightMargin {
@@ -225,7 +223,7 @@ NSString *const zBottomMargin                   = @"ZBottomMargin";
 }
 
 - (void)setZRightMargin:(id)zRightMarginValue {
-    [self p_MutableZTransforms][zRightMargin] = [[zRightMarginValue copy] autorelease];
+    [self p_SettableZTransforms][zRightMargin] = [[zRightMarginValue copy] autorelease];
 }
 
 - (id)zTopMargin {
@@ -233,7 +231,7 @@ NSString *const zBottomMargin                   = @"ZBottomMargin";
 }
 
 - (void)setZTopMargin:(id)zTopMarginValue {
-    [self p_MutableZTransforms][zTopMargin] = [[zTopMarginValue copy] autorelease];
+    [self p_SettableZTransforms][zTopMargin] = [[zTopMarginValue copy] autorelease];
 }
 
 - (id)zHeight {
@@ -241,7 +239,7 @@ NSString *const zBottomMargin                   = @"ZBottomMargin";
 }
 
 - (void)setZHeight:(id)zHeightValue {
-    [self p_MutableZTransforms][zHeight] = [[zHeightValue copy] autorelease];
+    [self p_SettableZTransforms][zHeight] = [[zHeightValue copy] autorelease];
 }
 
 - (id)zBottomMargin {
@@ -249,7 +247,7 @@ NSString *const zBottomMargin                   = @"ZBottomMargin";
 }
 
 - (void)setZBottomMargin:(id)zBottomMarginValue {
-    [self p_MutableZTransforms][zBottomMargin] = [[zBottomMarginValue copy] autorelease];
+    [self p_SettableZTransforms][zBottomMargin] = [[zBottomMarginValue copy] autorelease];
 }
 
 #pragma mark - Autolayout Implement Methods.
@@ -259,12 +257,8 @@ CGFloat transformValue(UIView *superview, id transform) {
         return [(NSNumber *)transform cgfloatValue];
     } else if ([transform isKindOfClass:[ZUXTransform class]]) {
         ZUXTransformBlock block = [(ZUXTransform *)transform block];
-        NSCAssert(block, @"ZUXTransformBlock Undefined.");
-        return superview ? block(superview) : 0;
-    } else if (transform == nil) {
-        return 0;
+        return (block && superview) ? block(superview) : 0;
     }
-    NSCAssert(false, @"Transform Type Unrecognized.");
     return 0;
 }
 
@@ -275,8 +269,6 @@ void transformOriginAndSize(UIView *superview, CGFloat superviewSize,
     CGFloat margin2 = transformValue(superview, marginTransform2);
     *resultSize = sizeTransform ? transformValue(superview, sizeTransform) : superviewSize - margin1 - margin2;
     
-    if (!marginTransform1) margin1 = superviewSize - *resultSize - margin2;
-    if (!marginTransform2) margin2 = superviewSize - *resultSize - margin1;
     // adjust origin:
     // SS           : superviewSize
     // S            : size
@@ -293,7 +285,6 @@ void transformOriginAndSize(UIView *superview, CGFloat superviewSize,
 CGRect rectTransformFromSuperView(UIView *superview, NSDictionary *transforms) {
     NSDictionary *xTransforms = [transforms subDictionaryForKeys:@[zLeftMargin, zWidth, zRightMargin]];
     NSDictionary *yTransforms = [transforms subDictionaryForKeys:@[zTopMargin, zHeight, zBottomMargin]];
-    NSCAssert(xTransforms.count > 1 && yTransforms.count > 1, @"Transform parameters not enough.");
     
     CGRect result = CGRectZero;
     transformOriginAndSize(superview, superview.bounds.size.width,
@@ -307,7 +298,10 @@ CGRect rectTransformFromSuperView(UIView *superview, NSDictionary *transforms) {
 
 #pragma mark - Private Methods.
 
-- (NSMutableDictionary *)p_MutableZTransforms {
+- (NSMutableDictionary *)p_SettableZTransforms {
+    if (!objc_getAssociatedObject(self, zLayoutTransformsDictionaryKey)) {
+        [self setZTransforms:@{}];
+    }
     return (NSMutableDictionary *)self.zTransforms;
 }
 
