@@ -12,6 +12,17 @@
 		6A5BED521AF205810028B75E /* NSExpression+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5BED511AF205810028B75E /* NSExpression+ZUX.m */; };
 		6A5DE5D11AF74C3500470B17 /* ZUXVerticalGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5DE5D01AF74C3500470B17 /* ZUXVerticalGridView.m */; };
 		6A5DE5D41AF74DF100470B17 /* ZUXVerticalGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5DE5D31AF74DF100470B17 /* ZUXVerticalGridViewCell.m */; };
+		6A5DE5D91AF793EA00470B17 /* ZUXControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5DE5D81AF793EA00470B17 /* ZUXControl.m */; };
+		6A5DE5DC1AF7949F00470B17 /* ZUXLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5DE5DB1AF7949F00470B17 /* ZUXLabel.m */; };
+		6A5DE5DF1AF7974E00470B17 /* UILabel+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5DE5DE1AF7974E00470B17 /* UILabel+ZUX.m */; };
+		6A5DE5E21AF797D200470B17 /* ZUXRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5DE5E11AF797D200470B17 /* ZUXRefreshView.m */; };
+		6A5DE5E51AF7985000470B17 /* ZUXPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5DE5E41AF7985000470B17 /* ZUXPageControl.m */; };
+		6A5DE5E81AF7988E00470B17 /* UIImage+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5DE5E71AF7988E00470B17 /* UIImage+ZUX.m */; };
+		6A5DE5EB1AF79AC600470B17 /* ZUXImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5DE5EA1AF79AC600470B17 /* ZUXImageView.m */; };
+		6A5DE5EE1AF7A99400470B17 /* NSData+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5DE5ED1AF7A99400470B17 /* NSData+ZUX.m */; };
+		6A5DE5F11AF7AAE700470B17 /* UIColor+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5DE5F01AF7AAE700470B17 /* UIColor+ZUX.m */; };
+		6A5DE5F81AF7B04C00470B17 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5DE5F51AF7B04C00470B17 /* MBProgressHUD.m */; };
+		6A5DE5F91AF7B04C00470B17 /* UIView+MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5DE5F71AF7B04C00470B17 /* UIView+MBProgressHUD.m */; };
 		6A62CBBB1AEDDA7A0017D418 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A62CBBA1AEDDA7A0017D418 /* main.m */; };
 		6A62CBBE1AEDDA7A0017D418 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A62CBBD1AEDDA7A0017D418 /* AppDelegate.m */; };
 		6A62CBC11AEDDA7A0017D418 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A62CBC01AEDDA7A0017D418 /* ViewController.m */; };
@@ -49,6 +60,28 @@
 		6A5DE5D21AF74DF100470B17 /* ZUXVerticalGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZUXVerticalGridViewCell.h; path = views/ZUXVerticalGridViewCell.h; sourceTree = "<group>"; };
 		6A5DE5D31AF74DF100470B17 /* ZUXVerticalGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZUXVerticalGridViewCell.m; path = views/ZUXVerticalGridViewCell.m; sourceTree = "<group>"; };
 		6A5DE5D61AF754BA00470B17 /* ZUXVerticalGridViewCellInternal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ZUXVerticalGridViewCellInternal.h; path = privates/ZUXVerticalGridViewCellInternal.h; sourceTree = "<group>"; };
+		6A5DE5D71AF793EA00470B17 /* ZUXControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZUXControl.h; path = views/ZUXControl.h; sourceTree = "<group>"; };
+		6A5DE5D81AF793EA00470B17 /* ZUXControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZUXControl.m; path = views/ZUXControl.m; sourceTree = "<group>"; };
+		6A5DE5DA1AF7949F00470B17 /* ZUXLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZUXLabel.h; path = views/ZUXLabel.h; sourceTree = "<group>"; };
+		6A5DE5DB1AF7949F00470B17 /* ZUXLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZUXLabel.m; path = views/ZUXLabel.m; sourceTree = "<group>"; };
+		6A5DE5DD1AF7974E00470B17 /* UILabel+ZUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UILabel+ZUX.h"; path = "categories/uikit/UILabel+ZUX.h"; sourceTree = "<group>"; };
+		6A5DE5DE1AF7974E00470B17 /* UILabel+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UILabel+ZUX.m"; path = "categories/uikit/UILabel+ZUX.m"; sourceTree = "<group>"; };
+		6A5DE5E01AF797D200470B17 /* ZUXRefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZUXRefreshView.h; path = views/ZUXRefreshView.h; sourceTree = "<group>"; };
+		6A5DE5E11AF797D200470B17 /* ZUXRefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZUXRefreshView.m; path = views/ZUXRefreshView.m; sourceTree = "<group>"; };
+		6A5DE5E31AF7985000470B17 /* ZUXPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZUXPageControl.h; path = views/ZUXPageControl.h; sourceTree = "<group>"; };
+		6A5DE5E41AF7985000470B17 /* ZUXPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZUXPageControl.m; path = views/ZUXPageControl.m; sourceTree = "<group>"; };
+		6A5DE5E61AF7988E00470B17 /* UIImage+ZUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+ZUX.h"; path = "categories/uikit/UIImage+ZUX.h"; sourceTree = "<group>"; };
+		6A5DE5E71AF7988E00470B17 /* UIImage+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+ZUX.m"; path = "categories/uikit/UIImage+ZUX.m"; sourceTree = "<group>"; };
+		6A5DE5E91AF79AC600470B17 /* ZUXImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZUXImageView.h; path = views/ZUXImageView.h; sourceTree = "<group>"; };
+		6A5DE5EA1AF79AC600470B17 /* ZUXImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZUXImageView.m; path = views/ZUXImageView.m; sourceTree = "<group>"; };
+		6A5DE5EC1AF7A99400470B17 /* NSData+ZUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+ZUX.h"; path = "categories/foundation/NSData+ZUX.h"; sourceTree = "<group>"; };
+		6A5DE5ED1AF7A99400470B17 /* NSData+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+ZUX.m"; path = "categories/foundation/NSData+ZUX.m"; sourceTree = "<group>"; };
+		6A5DE5EF1AF7AAE700470B17 /* UIColor+ZUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+ZUX.h"; path = "categories/uikit/UIColor+ZUX.h"; sourceTree = "<group>"; };
+		6A5DE5F01AF7AAE700470B17 /* UIColor+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+ZUX.m"; path = "categories/uikit/UIColor+ZUX.m"; sourceTree = "<group>"; };
+		6A5DE5F41AF7B04C00470B17 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = mbProgressHUD/MBProgressHUD.h; sourceTree = "<group>"; };
+		6A5DE5F51AF7B04C00470B17 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = mbProgressHUD/MBProgressHUD.m; sourceTree = "<group>"; };
+		6A5DE5F61AF7B04C00470B17 /* UIView+MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+MBProgressHUD.h"; path = "mbProgressHUD/UIView+MBProgressHUD.h"; sourceTree = "<group>"; };
+		6A5DE5F71AF7B04C00470B17 /* UIView+MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+MBProgressHUD.m"; path = "mbProgressHUD/UIView+MBProgressHUD.m"; sourceTree = "<group>"; };
 		6A62CBB51AEDDA7A0017D418 /* zutilsX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = zutilsX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A62CBB91AEDDA7A0017D418 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6A62CBBA1AEDDA7A0017D418 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -106,6 +139,17 @@
 			name = privates;
 			sourceTree = "<group>";
 		};
+		6A5DE5F21AF7AFA900470B17 /* mbProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				6A5DE5F41AF7B04C00470B17 /* MBProgressHUD.h */,
+				6A5DE5F51AF7B04C00470B17 /* MBProgressHUD.m */,
+				6A5DE5F61AF7B04C00470B17 /* UIView+MBProgressHUD.h */,
+				6A5DE5F71AF7B04C00470B17 /* UIView+MBProgressHUD.m */,
+			);
+			name = mbProgressHUD;
+			sourceTree = "<group>";
+		};
 		6A62CBAC1AEDDA7A0017D418 = {
 			isa = PBXGroup;
 			children = (
@@ -127,6 +171,7 @@
 		6A62CBB71AEDDA7A0017D418 /* zutilsX */ = {
 			isa = PBXGroup;
 			children = (
+				6A5DE5F21AF7AFA900470B17 /* mbProgressHUD */,
 				6A62CBE11AEDDEF50017D418 /* views */,
 				6A62CBDE1AEDDC380017D418 /* categories */,
 				6ADE83EE1AF07A4C00214B21 /* entities */,
@@ -183,10 +228,20 @@
 			children = (
 				6A62CBEB1AEDE1AA0017D418 /* ZUXView.h */,
 				6A62CBEC1AEDE1AA0017D418 /* ZUXView.m */,
+				6A5DE5D71AF793EA00470B17 /* ZUXControl.h */,
+				6A5DE5D81AF793EA00470B17 /* ZUXControl.m */,
+				6A5DE5DA1AF7949F00470B17 /* ZUXLabel.h */,
+				6A5DE5DB1AF7949F00470B17 /* ZUXLabel.m */,
+				6A5DE5E91AF79AC600470B17 /* ZUXImageView.h */,
+				6A5DE5EA1AF79AC600470B17 /* ZUXImageView.m */,
 				6A5DE5CF1AF74C3500470B17 /* ZUXVerticalGridView.h */,
 				6A5DE5D01AF74C3500470B17 /* ZUXVerticalGridView.m */,
 				6A5DE5D21AF74DF100470B17 /* ZUXVerticalGridViewCell.h */,
 				6A5DE5D31AF74DF100470B17 /* ZUXVerticalGridViewCell.m */,
+				6A5DE5E01AF797D200470B17 /* ZUXRefreshView.h */,
+				6A5DE5E11AF797D200470B17 /* ZUXRefreshView.m */,
+				6A5DE5E31AF7985000470B17 /* ZUXPageControl.h */,
+				6A5DE5E41AF7985000470B17 /* ZUXPageControl.m */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -196,6 +251,12 @@
 			children = (
 				6A62CBE81AEDE02D0017D418 /* UIView+ZUX.h */,
 				6A62CBE91AEDE02D0017D418 /* UIView+ZUX.m */,
+				6A5DE5DD1AF7974E00470B17 /* UILabel+ZUX.h */,
+				6A5DE5DE1AF7974E00470B17 /* UILabel+ZUX.m */,
+				6A5DE5E61AF7988E00470B17 /* UIImage+ZUX.h */,
+				6A5DE5E71AF7988E00470B17 /* UIImage+ZUX.m */,
+				6A5DE5EF1AF7AAE700470B17 /* UIColor+ZUX.h */,
+				6A5DE5F01AF7AAE700470B17 /* UIColor+ZUX.m */,
 			);
 			name = uikit;
 			sourceTree = "<group>";
@@ -213,6 +274,8 @@
 				6A62CBF71AEE65400017D418 /* NSArray+ZUX.m */,
 				6A62CBF91AEE65BC0017D418 /* NSDictionary+ZUX.h */,
 				6A62CBFA1AEE65BC0017D418 /* NSDictionary+ZUX.m */,
+				6A5DE5EC1AF7A99400470B17 /* NSData+ZUX.h */,
+				6A5DE5ED1AF7A99400470B17 /* NSData+ZUX.m */,
 				6A5BED4D1AF1F3CB0028B75E /* NSString+ZUX.h */,
 				6A5BED4E1AF1F3CB0028B75E /* NSString+ZUX.m */,
 				6A5BED4A1AF1D8F90028B75E /* NSValue+ZUX.h */,
@@ -330,22 +393,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A5DE5E21AF797D200470B17 /* ZUXRefreshView.m in Sources */,
 				6A5BED4C1AF1D8F90028B75E /* NSValue+ZUX.m in Sources */,
 				6A62CBED1AEDE1AA0017D418 /* ZUXView.m in Sources */,
+				6A5DE5E51AF7985000470B17 /* ZUXPageControl.m in Sources */,
+				6A5DE5EE1AF7A99400470B17 /* NSData+ZUX.m in Sources */,
 				6A5DE5D11AF74C3500470B17 /* ZUXVerticalGridView.m in Sources */,
 				6A5BED4F1AF1F3CB0028B75E /* NSString+ZUX.m in Sources */,
+				6A5DE5DC1AF7949F00470B17 /* ZUXLabel.m in Sources */,
+				6A5DE5E81AF7988E00470B17 /* UIImage+ZUX.m in Sources */,
+				6A5DE5F81AF7B04C00470B17 /* MBProgressHUD.m in Sources */,
 				6A62CBC11AEDDA7A0017D418 /* ViewController.m in Sources */,
 				6A62CBFF1AEE810A0017D418 /* NSObject+ZUX.m in Sources */,
 				6A5DE5D41AF74DF100470B17 /* ZUXVerticalGridViewCell.m in Sources */,
+				6A5DE5F11AF7AAE700470B17 /* UIColor+ZUX.m in Sources */,
 				6A62CBF81AEE65400017D418 /* NSArray+ZUX.m in Sources */,
 				6A62CBE71AEDDF970017D418 /* NSNull+ZUX.m in Sources */,
 				6A62CBEA1AEDE02D0017D418 /* UIView+ZUX.m in Sources */,
 				6A5BED521AF205810028B75E /* NSExpression+ZUX.m in Sources */,
+				6A5DE5F91AF7B04C00470B17 /* UIView+MBProgressHUD.m in Sources */,
+				6A5DE5DF1AF7974E00470B17 /* UILabel+ZUX.m in Sources */,
 				6ADE83F41AF07ADA00214B21 /* ZUXTransform.m in Sources */,
 				6A62CBF41AEE5A740017D418 /* NSNumber+ZUX.m in Sources */,
+				6A5DE5EB1AF79AC600470B17 /* ZUXImageView.m in Sources */,
 				6A62CBBE1AEDDA7A0017D418 /* AppDelegate.m in Sources */,
 				6A62CBFB1AEE65BC0017D418 /* NSDictionary+ZUX.m in Sources */,
 				6A62CBBB1AEDDA7A0017D418 /* main.m in Sources */,
+				6A5DE5D91AF793EA00470B17 /* ZUXControl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

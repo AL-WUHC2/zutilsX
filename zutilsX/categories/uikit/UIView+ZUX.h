@@ -38,14 +38,14 @@ ZUX_EXTERN NSString *const zBottomMargin;
 
 @interface UIView (ZUXAutoLayout)
 
-@property (copy, nonatomic) NSDictionary *zTransforms; // animatable.
+@property (nonatomic, copy) NSDictionary *zTransforms; // animatable.
 
-@property (copy, nonatomic) id zLeftMargin; // animatable.
-@property (copy, nonatomic) id zWidth; // animatable.
-@property (copy, nonatomic) id zRightMargin; // animatable.
-@property (copy, nonatomic) id zTopMargin; // animatable.
-@property (copy, nonatomic) id zHeight; // animatable.
-@property (copy, nonatomic) id zBottomMargin; // animatable.
+@property (nonatomic, copy) id zLeftMargin; // animatable.
+@property (nonatomic, copy) id zWidth; // animatable.
+@property (nonatomic, copy) id zRightMargin; // animatable.
+@property (nonatomic, copy) id zTopMargin; // animatable.
+@property (nonatomic, copy) id zHeight; // animatable.
+@property (nonatomic, copy) id zBottomMargin; // animatable.
 
 - (ZUX_INSTANCETYPE)initWithTransformDictionary:(NSDictionary *)transforms;
 

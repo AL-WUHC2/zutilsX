@@ -11,7 +11,7 @@
 
 @interface ZUXVerticalGridViewCell : ZUXView
 
-@property (assign, nonatomic, getter=isSelected) BOOL selected;
+@property (nonatomic, assign, getter=isSelected) BOOL selected;
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated;
 

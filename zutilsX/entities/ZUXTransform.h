@@ -15,7 +15,7 @@ typedef CGFloat (^ZUXTransformBlock)(UIView *superview);
 
 @interface ZUXTransform : NSObject <NSCopying>
 
-@property (readonly, nonatomic) ZUXTransformBlock block;
+@property (nonatomic, readonly) ZUXTransformBlock block;
 
 + (ZUX_INSTANCETYPE)transformWithBlock:(ZUXTransformBlock)block;
 

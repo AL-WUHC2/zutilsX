@@ -41,13 +41,13 @@
 
 @interface ZUXVerticalGridView : UIScrollView
 
-@property (assign, nonatomic) id<ZUXVerticalGridViewDataSource> dataSource;
+@property (nonatomic, assign) id<ZUXVerticalGridViewDataSource> dataSource;
 
-@property (assign, nonatomic) id<ZUXVerticalGridViewDelegate> delegate;
+@property (nonatomic, assign) id<ZUXVerticalGridViewDelegate> delegate;
 
-@property (assign, nonatomic) NSUInteger rowCount;
+@property (nonatomic, assign) NSUInteger rowCount;
 
-@property (assign, nonatomic) NSUInteger columnCount;
+@property (nonatomic, assign) NSUInteger columnCount;
 
 - (void)zuxInitial;
 

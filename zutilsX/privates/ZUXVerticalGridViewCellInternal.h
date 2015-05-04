@@ -10,8 +10,8 @@
 
 @interface ZUXVerticalGridViewCell ()
 
-@property (assign, nonatomic) NSUInteger index;
+@property (nonatomic, assign) NSUInteger index;
 
-@property (assign, nonatomic) ZUXVerticalGridView *gridView;
+@property (nonatomic, assign) ZUXVerticalGridView *gridView;
 
 @end
