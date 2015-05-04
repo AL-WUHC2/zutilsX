@@ -10,10 +10,13 @@
 #import "NSObject+ZUX.h"
 #import "NSNumber+ZUX.h"
 #import "NSDictionary+ZUX.h"
+#import "NSExpression+ZUX.h"
 #import "ZUXTransform.h"
 #import <objc/runtime.h>
 
 @implementation UIView (ZUX)
+
+#pragma mark - Properties Methods.
 
 - (BOOL)maskToBounds {
     return self.layer.masksToBounds;
@@ -80,6 +83,8 @@
 }
 
 @end // UIView (ZUX) end
+
+#pragma mark -
 
 NSString *const zLayoutTransformsDictionaryKey  = @"ZLayoutTransformsDictionaryKey";
 
@@ -157,6 +162,8 @@ NSString *const zBottomMargin                   = @"ZBottomMargin";
         self.frame = rectTransformFromSuperView(self.superview, transforms);
     }
 }
+
+#pragma mark - Properties Methods.
 
 - (NSDictionary *)zTransforms {
     return objc_getAssociatedObject(self, zLayoutTransformsDictionaryKey);
@@ -258,6 +265,11 @@ CGFloat transformValue(UIView *superview, id transform) {
     } else if ([transform isKindOfClass:[ZUXTransform class]]) {
         ZUXTransformBlock block = [(ZUXTransform *)transform block];
         return (block && superview) ? block(superview) : 0;
+    } else if ([transform isKindOfClass:[NSExpression class]]) {
+        id result = [(NSExpression *)transform expressionValueWithObject:superview context:nil];
+        return [result respondsToSelector:@selector(cgfloatValue)] ? [result cgfloatValue] : 0;
+    } else if ([transform isKindOfClass:[NSString class]]) {
+        return transformValue(superview, [NSExpression expressionWithParametricFormat:transform]);
     }
     return 0;
 }

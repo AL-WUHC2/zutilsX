@@ -18,6 +18,9 @@
 #import "NSNumber+ZUX.h"
 #import "NSArray+ZUX.h"
 #import "NSDictionary+ZUX.h"
+#import "NSString+ZUX.h"
+#import "NSValue+ZUX.h"
+#import "NSExpression+ZUX.h"
 
 #import "UIView+ZUX.h"
 

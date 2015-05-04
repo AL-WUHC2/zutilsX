@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6A5BED4C1AF1D8F90028B75E /* NSValue+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5BED4B1AF1D8F90028B75E /* NSValue+ZUX.m */; };
+		6A5BED4F1AF1F3CB0028B75E /* NSString+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5BED4E1AF1F3CB0028B75E /* NSString+ZUX.m */; };
+		6A5BED521AF205810028B75E /* NSExpression+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5BED511AF205810028B75E /* NSExpression+ZUX.m */; };
 		6A62CBBB1AEDDA7A0017D418 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A62CBBA1AEDDA7A0017D418 /* main.m */; };
 		6A62CBBE1AEDDA7A0017D418 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A62CBBD1AEDDA7A0017D418 /* AppDelegate.m */; };
 		6A62CBC11AEDDA7A0017D418 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A62CBC01AEDDA7A0017D418 /* ViewController.m */; };
@@ -33,6 +36,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6A5BED4A1AF1D8F90028B75E /* NSValue+ZUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSValue+ZUX.h"; path = "categories/foundation/NSValue+ZUX.h"; sourceTree = "<group>"; };
+		6A5BED4B1AF1D8F90028B75E /* NSValue+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSValue+ZUX.m"; path = "categories/foundation/NSValue+ZUX.m"; sourceTree = "<group>"; };
+		6A5BED4D1AF1F3CB0028B75E /* NSString+ZUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+ZUX.h"; path = "categories/foundation/NSString+ZUX.h"; sourceTree = "<group>"; };
+		6A5BED4E1AF1F3CB0028B75E /* NSString+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+ZUX.m"; path = "categories/foundation/NSString+ZUX.m"; sourceTree = "<group>"; };
+		6A5BED501AF205810028B75E /* NSExpression+ZUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSExpression+ZUX.h"; path = "categories/foundation/NSExpression+ZUX.h"; sourceTree = "<group>"; };
+		6A5BED511AF205810028B75E /* NSExpression+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSExpression+ZUX.m"; path = "categories/foundation/NSExpression+ZUX.m"; sourceTree = "<group>"; };
 		6A62CBB51AEDDA7A0017D418 /* zutilsX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = zutilsX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A62CBB91AEDDA7A0017D418 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6A62CBBA1AEDDA7A0017D418 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -184,6 +193,12 @@
 				6A62CBF71AEE65400017D418 /* NSArray+ZUX.m */,
 				6A62CBF91AEE65BC0017D418 /* NSDictionary+ZUX.h */,
 				6A62CBFA1AEE65BC0017D418 /* NSDictionary+ZUX.m */,
+				6A5BED4D1AF1F3CB0028B75E /* NSString+ZUX.h */,
+				6A5BED4E1AF1F3CB0028B75E /* NSString+ZUX.m */,
+				6A5BED4A1AF1D8F90028B75E /* NSValue+ZUX.h */,
+				6A5BED4B1AF1D8F90028B75E /* NSValue+ZUX.m */,
+				6A5BED501AF205810028B75E /* NSExpression+ZUX.h */,
+				6A5BED511AF205810028B75E /* NSExpression+ZUX.m */,
 			);
 			name = foundation;
 			sourceTree = "<group>";
@@ -295,12 +310,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A5BED4C1AF1D8F90028B75E /* NSValue+ZUX.m in Sources */,
 				6A62CBED1AEDE1AA0017D418 /* ZUXView.m in Sources */,
+				6A5BED4F1AF1F3CB0028B75E /* NSString+ZUX.m in Sources */,
 				6A62CBC11AEDDA7A0017D418 /* ViewController.m in Sources */,
 				6A62CBFF1AEE810A0017D418 /* NSObject+ZUX.m in Sources */,
 				6A62CBF81AEE65400017D418 /* NSArray+ZUX.m in Sources */,
 				6A62CBE71AEDDF970017D418 /* NSNull+ZUX.m in Sources */,
 				6A62CBEA1AEDE02D0017D418 /* UIView+ZUX.m in Sources */,
+				6A5BED521AF205810028B75E /* NSExpression+ZUX.m in Sources */,
 				6ADE83F41AF07ADA00214B21 /* ZUXTransform.m in Sources */,
 				6A62CBF41AEE5A740017D418 /* NSNumber+ZUX.m in Sources */,
 				6A62CBBE1AEDDA7A0017D418 /* AppDelegate.m in Sources */,
