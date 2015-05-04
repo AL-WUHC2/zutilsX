@@ -90,6 +90,12 @@
   -zuxInitial
   增加统一初始化接口.
 
+- ZUXVerticalGridView & ZUXVerticalGridViewCell
+
+  定宽网格视图.
+
+  需指定列数和行数(初始), 由数据源提供单元格视图实例数与单元格占宽, 托管响应单元格点击事件.
+
 #####Entities
 
 - ZUXTransform

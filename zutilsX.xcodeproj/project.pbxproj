@@ -10,6 +10,8 @@
 		6A5BED4C1AF1D8F90028B75E /* NSValue+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5BED4B1AF1D8F90028B75E /* NSValue+ZUX.m */; };
 		6A5BED4F1AF1F3CB0028B75E /* NSString+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5BED4E1AF1F3CB0028B75E /* NSString+ZUX.m */; };
 		6A5BED521AF205810028B75E /* NSExpression+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5BED511AF205810028B75E /* NSExpression+ZUX.m */; };
+		6A5DE5D11AF74C3500470B17 /* ZUXVerticalGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5DE5D01AF74C3500470B17 /* ZUXVerticalGridView.m */; };
+		6A5DE5D41AF74DF100470B17 /* ZUXVerticalGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5DE5D31AF74DF100470B17 /* ZUXVerticalGridViewCell.m */; };
 		6A62CBBB1AEDDA7A0017D418 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A62CBBA1AEDDA7A0017D418 /* main.m */; };
 		6A62CBBE1AEDDA7A0017D418 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A62CBBD1AEDDA7A0017D418 /* AppDelegate.m */; };
 		6A62CBC11AEDDA7A0017D418 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A62CBC01AEDDA7A0017D418 /* ViewController.m */; };
@@ -42,6 +44,11 @@
 		6A5BED4E1AF1F3CB0028B75E /* NSString+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+ZUX.m"; path = "categories/foundation/NSString+ZUX.m"; sourceTree = "<group>"; };
 		6A5BED501AF205810028B75E /* NSExpression+ZUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSExpression+ZUX.h"; path = "categories/foundation/NSExpression+ZUX.h"; sourceTree = "<group>"; };
 		6A5BED511AF205810028B75E /* NSExpression+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSExpression+ZUX.m"; path = "categories/foundation/NSExpression+ZUX.m"; sourceTree = "<group>"; };
+		6A5DE5CF1AF74C3500470B17 /* ZUXVerticalGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZUXVerticalGridView.h; path = views/ZUXVerticalGridView.h; sourceTree = "<group>"; };
+		6A5DE5D01AF74C3500470B17 /* ZUXVerticalGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZUXVerticalGridView.m; path = views/ZUXVerticalGridView.m; sourceTree = "<group>"; };
+		6A5DE5D21AF74DF100470B17 /* ZUXVerticalGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZUXVerticalGridViewCell.h; path = views/ZUXVerticalGridViewCell.h; sourceTree = "<group>"; };
+		6A5DE5D31AF74DF100470B17 /* ZUXVerticalGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZUXVerticalGridViewCell.m; path = views/ZUXVerticalGridViewCell.m; sourceTree = "<group>"; };
+		6A5DE5D61AF754BA00470B17 /* ZUXVerticalGridViewCellInternal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ZUXVerticalGridViewCellInternal.h; path = privates/ZUXVerticalGridViewCellInternal.h; sourceTree = "<group>"; };
 		6A62CBB51AEDDA7A0017D418 /* zutilsX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = zutilsX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A62CBB91AEDDA7A0017D418 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6A62CBBA1AEDDA7A0017D418 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -91,6 +98,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6A5DE5D51AF7548100470B17 /* privates */ = {
+			isa = PBXGroup;
+			children = (
+				6A5DE5D61AF754BA00470B17 /* ZUXVerticalGridViewCellInternal.h */,
+			);
+			name = privates;
+			sourceTree = "<group>";
+		};
 		6A62CBAC1AEDDA7A0017D418 = {
 			isa = PBXGroup;
 			children = (
@@ -115,6 +130,7 @@
 				6A62CBE11AEDDEF50017D418 /* views */,
 				6A62CBDE1AEDDC380017D418 /* categories */,
 				6ADE83EE1AF07A4C00214B21 /* entities */,
+				6A5DE5D51AF7548100470B17 /* privates */,
 				6A62CBF51AEE5E780017D418 /* zutilsX.h */,
 				6A62CBF11AEE04680017D418 /* zconstant.h */,
 				6A62CBBC1AEDDA7A0017D418 /* AppDelegate.h */,
@@ -167,6 +183,10 @@
 			children = (
 				6A62CBEB1AEDE1AA0017D418 /* ZUXView.h */,
 				6A62CBEC1AEDE1AA0017D418 /* ZUXView.m */,
+				6A5DE5CF1AF74C3500470B17 /* ZUXVerticalGridView.h */,
+				6A5DE5D01AF74C3500470B17 /* ZUXVerticalGridView.m */,
+				6A5DE5D21AF74DF100470B17 /* ZUXVerticalGridViewCell.h */,
+				6A5DE5D31AF74DF100470B17 /* ZUXVerticalGridViewCell.m */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -312,9 +332,11 @@
 			files = (
 				6A5BED4C1AF1D8F90028B75E /* NSValue+ZUX.m in Sources */,
 				6A62CBED1AEDE1AA0017D418 /* ZUXView.m in Sources */,
+				6A5DE5D11AF74C3500470B17 /* ZUXVerticalGridView.m in Sources */,
 				6A5BED4F1AF1F3CB0028B75E /* NSString+ZUX.m in Sources */,
 				6A62CBC11AEDDA7A0017D418 /* ViewController.m in Sources */,
 				6A62CBFF1AEE810A0017D418 /* NSObject+ZUX.m in Sources */,
+				6A5DE5D41AF74DF100470B17 /* ZUXVerticalGridViewCell.m in Sources */,
 				6A62CBF81AEE65400017D418 /* NSArray+ZUX.m in Sources */,
 				6A62CBE71AEDDF970017D418 /* NSNull+ZUX.m in Sources */,
 				6A62CBEA1AEDE02D0017D418 /* UIView+ZUX.m in Sources */,

@@ -113,6 +113,8 @@ NSString *const zBottomMargin                   = @"ZBottomMargin";
     // observe superview change
     [self swizzleOriSelector:@selector(willMoveToSuperview:)
              withNewSelector:@selector(zuxWillMoveToSuperview:)];
+    [self swizzleOriSelector:@selector(didMoveToSuperview)
+             withNewSelector:@selector(zuxDidMoveToSuperview)];
     // dealloc with removeObserver
     [self swizzleOriSelector:@selector(dealloc)
              withNewSelector:@selector(zuxDealloc)];
@@ -132,7 +134,12 @@ NSString *const zBottomMargin                   = @"ZBottomMargin";
     
     if ([self.superview isEqual:newSuperview]) return;
     [self p_RemoveFrameAndBoundsObserversFromView:self.superview];
-    [self p_AddFrameAndBoundsObserversToView:newSuperview];
+}
+
+- (void)zuxDidMoveToSuperview {
+    [self zuxDidMoveToSuperview];
+    
+    [self p_AddFrameAndBoundsObserversToView:self.superview];
 }
 
 - (void)zuxDealloc {

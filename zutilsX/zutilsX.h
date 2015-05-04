@@ -12,6 +12,8 @@
 #import "zconstant.h"
 
 #import "ZUXView.h"
+#import "ZUXVerticalGridView.h"
+#import "ZUXVerticalGridViewCell.h"
 
 #import "NSObject+ZUX.h"
 #import "NSNull+ZUX.h"
