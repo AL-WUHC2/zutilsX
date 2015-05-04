@@ -121,9 +121,6 @@ NSString *const zBottomMargin                   = @"ZBottomMargin";
 - (ZUX_INSTANCETYPE)initWithTransformDictionary:(NSDictionary *)transforms {
     [self init];
     
-    [self addObserver:self forKeyPath:zTransformsKVOKey
-              options:NSKeyValueObservingOptionNew
-              context:zLayoutKVOContext];
     [self setZTransforms:transforms];
     [self p_AddFrameAndBoundsObserversToView:self.superview];
     
@@ -140,8 +137,6 @@ NSString *const zBottomMargin                   = @"ZBottomMargin";
 
 - (void)zuxDealloc {
     [self p_RemoveFrameAndBoundsObserversFromView:self.superview];
-    [self removeObserver:self forKeyPath:zTransformsKVOKey
-                 context:zLayoutKVOContext];
     [self setZTransforms:nil];
     
     [self zuxDealloc];
@@ -152,14 +147,11 @@ NSString *const zBottomMargin                   = @"ZBottomMargin";
     if (![zLayoutKVOContext isEqual:context]) [super observeValueForKeyPath:keyPath ofObject:object
                                                                      change:change context:context];
     
-    NSDictionary *transforms = self.zTransforms;
-    if (!self.superview || !transforms) return;
-    
-    if (([self.superview isEqual:object] && [@[zSuperviewFrameKVOKey, zSuperviewBoundsKVOKey] containsObject:keyPath]) ||
-        ([self isEqual:object] && [zTransformsKVOKey isEqualToString:keyPath]) ||
-        ([transforms isEqual:object] && [@[zLeftMarginKVOKey, zWidthKVOKey, zRightMarginKVOKey,
-                                           zTopMarginKVOKey, zHeightKVOKey, zBottomMarginKVOKey] containsObject:keyPath])) {
-        self.frame = rectTransformFromSuperView(self.superview, transforms);
+    if (([object isEqual:self.superview] && [@[zSuperviewFrameKVOKey, zSuperviewBoundsKVOKey] containsObject:keyPath]) ||
+        ([object isEqual:self] && [zTransformsKVOKey isEqualToString:keyPath]) ||
+        ([object isEqual:self.zTransforms] && [@[zLeftMarginKVOKey, zWidthKVOKey, zRightMarginKVOKey, zTopMarginKVOKey, zHeightKVOKey, zBottomMarginKVOKey] containsObject:keyPath])) {
+        if (!self.superview || !self.zTransforms) return;
+        self.frame = rectTransformFromSuperView(self.superview, self.zTransforms);
     }
 }
 
@@ -207,6 +199,9 @@ NSString *const zBottomMargin                   = @"ZBottomMargin";
     [transforms addObserver:self forKeyPath:zBottomMarginKVOKey
                     options:NSKeyValueObservingOptionNew
                     context:zLayoutKVOContext];
+    
+    [self observeValueForKeyPath:zTransformsKVOKey ofObject:self
+                          change:@{} context:zLayoutKVOContext];
 }
 
 - (id)zLeftMargin {
