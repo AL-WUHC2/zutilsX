@@ -32,6 +32,7 @@ static inline NSDictionary * NSAttributedStringAttributesFromZUXLinesSpacingLabe
         paragraphStyle.lineSpacing = label.linesSpacing;
         
         mutableAttributes[(NSString *)kCTParagraphStyleAttributeName] = paragraphStyle;
+        [paragraphStyle release];
     } else {
         CTFontRef font = CTFontCreateWithName((__bridge CFStringRef)label.font.fontName, label.font.pointSize, NULL);
         mutableAttributes[(NSString *)kCTFontAttributeName] = (__bridge id)font;

@@ -55,7 +55,7 @@ static const short _base64DecodingTable[256] = {
         output[index + 3] = (i + 2) < length ? _base64EncodingTable[(value >> 0) & 0x3F] : '=';
     }
     
-    return [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+    return [[[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding] autorelease];
 }
 
 // Adapted from http://www.cocoadev.com/index.pl?BaseSixtyFour

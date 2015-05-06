@@ -46,8 +46,8 @@
 
 - (NSComparisonResult)compareToVersionString:(NSString *)version {
     // Break version into fields (separated by '.')
-    NSMutableArray *leftFields  = [[NSMutableArray alloc] initWithArray:[self  componentsSeparatedByString:@"."]];
-    NSMutableArray *rightFields = [[NSMutableArray alloc] initWithArray:[version componentsSeparatedByString:@"."]];
+    NSMutableArray *leftFields  = [NSMutableArray arrayWithArray:[self  componentsSeparatedByString:@"."]];
+    NSMutableArray *rightFields = [NSMutableArray arrayWithArray:[version componentsSeparatedByString:@"."]];
     
     // Implict ".0" in case version doesn't have the same number of '.'
     if ([leftFields count] < [rightFields count]) {
@@ -127,11 +127,11 @@
 
 - (NSString *)stringByEscapingForURLQuery {
     static CFStringRef toEscape = CFSTR(":/=,!$&'()*+;[]@#?% ");
-    return (NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
-                                                               (__bridge CFStringRef)self,
-                                                               NULL,
-                                                               toEscape,
-                                                               kCFStringEncodingUTF8);
+    return [(NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+                                                                (__bridge CFStringRef)self,
+                                                                NULL,
+                                                                toEscape,
+                                                                kCFStringEncodingUTF8) autorelease];
 }
 
 
@@ -172,7 +172,8 @@
 }
 
 + (NSString *)stringWithBase64String:(NSString *)base64String {
-    return [[NSString alloc] initWithData:[NSData dataWithBase64String:base64String] encoding:NSUTF8StringEncoding];
+    return [[[NSString alloc] initWithData:[NSData dataWithBase64String:base64String]
+                                  encoding:NSUTF8StringEncoding] autorelease];
 }
 
 + (NSString *)replaceUnicodeToUTF8:(NSString *)aUnicodeString {

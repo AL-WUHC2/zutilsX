@@ -121,11 +121,10 @@ NSString *const zBottomMargin                   = @"ZBottomMargin";
 }
 
 - (ZUX_INSTANCETYPE)initWithTransformDictionary:(NSDictionary *)transforms {
-    [self init];
-    
-    [self setZTransforms:transforms];
-    [self p_AddFrameAndBoundsObserversToView:self.superview];
-    
+    if (self = [super init]) {
+        [self setZTransforms:transforms];
+        [self p_AddFrameAndBoundsObserversToView:self.superview];
+    }
     return self;
 }
 
