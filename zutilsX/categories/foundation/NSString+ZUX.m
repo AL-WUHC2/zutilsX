@@ -89,6 +89,22 @@
     return [[self substringFromIndex:startPos] rangeOfString:aString options:NSCaseInsensitiveSearch].location;
 }
 
+#pragma mark - Contain Methods.
+
+- (BOOL)containsString:(NSString *)aString {
+    return [self indexOfString:aString] != NSNotFound;
+}
+
+- (BOOL)containsCaseInsensitiveString:(NSString *)aString {
+    return [self indexCaseInsensitiveOfString:aString] != NSNotFound;
+}
+
+#pragma mark - Split Methods.
+
+- (NSArray *)arrayBySplitsWithString:(NSString *)separatorString {
+    return [self componentsSeparatedByString:separatorString];
+}
+
 #pragma mark - Append Methods.
 
 + (ZUX_INSTANCETYPE)stringWithArray:(NSArray *)array {
@@ -121,6 +137,18 @@
     }
     
     return [NSString stringWithArray:temp];
+}
+
+#pragma mark - Replace Methods.
+
+- (NSString *)stringByReplacingString:(NSString *)searchString withString:(NSString *)replacement {
+    return [self stringByReplacingOccurrencesOfString:searchString withString:replacement
+                                              options:0 range:NSMakeRange(0, self.length)];
+}
+
+- (NSString *)stringByCaseInsensitiveReplacingString:(NSString *)searchString withString:(NSString *)replacement {
+    return [self stringByReplacingOccurrencesOfString:searchString withString:replacement
+                                              options:NSCaseInsensitiveSearch range:NSMakeRange(0, self.length)];
 }
 
 #pragma mark - Escape/Unescape Methods.

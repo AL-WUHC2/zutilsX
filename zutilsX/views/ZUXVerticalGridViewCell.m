@@ -42,6 +42,12 @@
 
 #pragma mark - Touch Responder.
 
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+}
+
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
+}
+
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     if (CGRectContainsPoint(self.bounds, [[touches anyObject] locationInView:self])) {
         if (self.isSelected) {

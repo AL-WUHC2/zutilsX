@@ -33,11 +33,21 @@
 
 - (NSUInteger)indexCaseInsensitiveOfString:(NSString *)aString fromIndex:(NSUInteger)startPos;
 
+- (BOOL)containsString:(NSString *)aString;
+
+- (BOOL)containsCaseInsensitiveString:(NSString *)aString;
+
+- (NSArray *)arrayBySplitsWithString:(NSString *)separatorString;
+
 + (ZUX_INSTANCETYPE)stringWithArray:(NSArray *)array;
 
 + (ZUX_INSTANCETYPE)stringWithArray:(NSArray *)array separator:(NSString *)separatorString;
 
 - (NSString *)appendWithObjects:(id)firstObj, ... NS_REQUIRES_NIL_TERMINATION;
+
+- (NSString *)stringByReplacingString:(NSString *)searchString withString:(NSString *)replacement;
+
+- (NSString *)stringByCaseInsensitiveReplacingString:(NSString *)searchString withString:(NSString *)replacement;
 
 - (NSString *)stringByEscapingForURLQuery;
 
