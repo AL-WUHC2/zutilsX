@@ -11,14 +11,14 @@
 typedef NS_ENUM(NSInteger, ZUXRefreshState) {
     ZUXRefreshNormal,
     ZUXRefreshPulling,
-    ZUXRefreshLoading
+    ZUXRefreshLoading,
 };
 
 typedef NS_ENUM(NSInteger, ZUXRefreshPullDirection) {
     ZUXRefreshPullDown,
     ZUXRefreshPullUp,
     ZUXRefreshPullRight,
-    ZUXRefreshPullLeft
+    ZUXRefreshPullLeft,
 };
 
 @class ZUXRefreshView;

@@ -203,6 +203,16 @@
         - NSExpression及其子类(expressionValueWithObject:superview, 获得结果的CGFloat值)
         - NSString及其子类([NSExpression expressionWithParametricFormat:transform]获得NSExpression对象, 按NSExpression及其子类进行计算)
 
+        // 自定义动画
+        -zuxAnimate:
+        -zuxAnimate:completion:
+
+        // 自定义动画相关枚举与结构体
+        (NS_OPTIONS)    ZUXAnimateType // 指定动画类型, 如平移/透明/翻页/缩放等
+        (NS_OPTIONS)    ZUXAnimateDirection // NS_OPTIONS, 指定平移/翻页动画方向
+
+        (struct)        ZUXAnimation // 定义动画类型/方向/持续时间/延迟时间
+
 - UILabel+ZUX
 
         // 计算Label合适的尺寸.

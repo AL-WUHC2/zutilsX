@@ -9,61 +9,42 @@
 #import "ViewController.h"
 #import "zutilsX.h"
 
-@interface ViewController () <ZUXVerticalGridViewDataSource, ZUXVerticalGridViewDelegate> {
-    NSArray *colorArray;
-    NSArray *widthArray;
-}
-
-@end
-
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor grayColor];
-    colorArray = [@[[UIColor blackColor], [UIColor whiteColor], [UIColor redColor], [UIColor greenColor], [UIColor blueColor], [UIColor yellowColor]] retain];
-    widthArray = [@[@2, @2, @1, @2, @1, @3] retain];
     
-    ZUXVerticalGridView *grid = [[ZUXVerticalGridView alloc] init];
-    grid.frame = self.view.bounds;
-    grid.dataSource = self;
-    grid.delegate = self;
-    grid.rowCount = 3;
-    grid.columnCount = 4;
-    [self.view addSubview:grid];
-    [grid release];
+    UIControl *content = [[UIControl alloc] init];
+    content.frame = self.view.bounds;
+    [content addTarget:self action:@selector(touch:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIView *v1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 160, 240)];
+    v1.backgroundColor = [UIColor redColor];
+    [content addSubview:v1];
+    [v1 release];
+    
+    UIView *v2 = [[UIView alloc] initWithFrame:CGRectMake(160, 0, 160, 240)];
+    v2.backgroundColor = [UIColor greenColor];
+    [content addSubview:v2];
+    [v2 release];
+    
+    UIView *v3 = [[UIView alloc] initWithFrame:CGRectMake(0, 240, 160, 240)];
+    v3.backgroundColor = [UIColor blueColor];
+    [content addSubview:v3];
+    [v3 release];
+    
+    [self.view addSubview:content];
+    [content zuxAnimate:ZUXAnimationMake(ZUXAnimateShrink|ZUXAnimateExpand, ZUXAnimateUp, 3, 0)];
+    [content release];
 }
 
 - (void)dealloc {
-    [colorArray release];
-    [widthArray release];
     [super dealloc];
 }
 
-#pragma mark - ZUXVerticalGridViewDataSource
-
-- (NSUInteger)numberOfCellsInGridView:(ZUXVerticalGridView *)view {
-    return [colorArray count];
-}
-
-- (ZUXVerticalGridViewCell *)gridView:(ZUXVerticalGridView *)view cellForIndex:(NSUInteger)index {
-    ZUXVerticalGridViewCell *cell = [[[ZUXVerticalGridViewCell alloc] init] autorelease];
-    cell.backgroundColor = colorArray[index];
-    return cell;
-}
-
-- (NSUInteger)gridView:(ZUXVerticalGridView *)view widthUnitForIndex:(NSUInteger)index {
-    return [widthArray[index] unsignedIntegerValue];
-}
-
-#pragma mark - ZUXVerticalGridViewDelegate
-
-- (void)gridView:(ZUXVerticalGridView *)view didSelectCellAtIndex:(NSUInteger)index {
-    NSLog(@"SELECT %@", colorArray[index]);
-}
-
-- (void)gridView:(ZUXVerticalGridView *)view didDeselectCellAtIndex:(NSUInteger)index {
-    NSLog(@"DESELECT %@", colorArray[index]);
+- (void)touch:(id)sender {
+    [sender zuxAnimate:ZUXAnimationMake(ZUXAnimateOut|ZUXAnimateSlide|ZUXAnimateShrink, ZUXAnimateDown, 3, 0)];
 }
 
 @end

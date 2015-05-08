@@ -108,6 +108,16 @@ NSString *const zBottomMargin                   = @"ZBottomMargin";
 
 @implementation UIView (ZUXAutoLayout)
 
+- (ZUX_INSTANCETYPE)initWithTransformDictionary:(NSDictionary *)transforms {
+    if (self = [super init]) {
+        [self setZTransforms:transforms];
+        [self p_AddFrameAndBoundsObserversToView:self.superview];
+    }
+    return self;
+}
+
+#pragma mark - Swizzle & Override Methods.
+
 + (void)load {
     [super load];
     // observe superview change
@@ -118,14 +128,6 @@ NSString *const zBottomMargin                   = @"ZBottomMargin";
     // dealloc with removeObserver
     [self swizzleOriSelector:@selector(dealloc)
              withNewSelector:@selector(zuxDealloc)];
-}
-
-- (ZUX_INSTANCETYPE)initWithTransformDictionary:(NSDictionary *)transforms {
-    if (self = [super init]) {
-        [self setZTransforms:transforms];
-        [self p_AddFrameAndBoundsObserversToView:self.superview];
-    }
-    return self;
 }
 
 - (void)zuxWillMoveToSuperview:(UIView *)newSuperview {
@@ -337,3 +339,97 @@ CGRect rectTransformFromSuperView(UIView *superview, NSDictionary *transforms) {
 }
 
 @end // UIView (ZUXAutoLayout) end
+
+#pragma mark -
+
+CGFloat ZUXAnimateZoomRatio = 2;
+
+@implementation UIView (ZUXAnimate)
+
+- (void)zuxAnimate:(ZUXAnimation)animation {
+    [self zuxAnimate:animation completion:^{}];
+}
+
+- (void)zuxAnimate:(ZUXAnimation)animation completion:(void (^)())completion {
+    CGAffineTransform selfStartTrans = self.transform;
+    CGAffineTransform selfFinalTrans = self.transform;
+    CGAffineTransform *selfTrans = &selfStartTrans;
+    
+    CGFloat selfStartAlpha = self.alpha;
+    CGFloat selfFinalAlpha = self.alpha;
+    CGFloat *selfAlpha = &selfStartAlpha;
+    
+    UIView *maskView = nil;
+    CGAffineTransform maskStartTrans = CGAffineTransformIdentity;
+    CGAffineTransform maskFinalTrans = CGAffineTransformIdentity;
+    CGAffineTransform *maskTrans = &maskStartTrans;
+
+    if (hasZUXAnimateType(animation, ZUXAnimateOut)) {
+        selfTrans = &selfFinalTrans;
+        selfAlpha = &selfFinalAlpha;
+        maskTrans = &maskFinalTrans;
+    }
+    
+    if (hasZUXAnimateType(animation, ZUXAnimateMove)) {
+        ZUXCGAffineTransformTranslate(selfTrans, ZUXAnimateTranslateVector(self, animation));
+    }
+    
+    if (hasZUXAnimateType(animation, ZUXAnimateFade)) *selfAlpha = 0;
+    
+    if (hasZUXAnimateType(animation, ZUXAnimateSlide)) {
+        maskView = [[[UIView alloc] initWithFrame:self.bounds] autorelease];
+        maskView.layer.backgroundColor = [UIColor whiteColor].CGColor;
+        self.layer.mask = maskView.layer;
+        ZUXCGAffineTransformTranslate(maskTrans, ZUXAnimateTranslateVector(self, animation));
+    }
+    
+    CGFloat scale = 1;
+    if (hasZUXAnimateType(animation, ZUXAnimateExpand)) scale /= MAX(ZUXAnimateZoomRatio, 1);
+    if (hasZUXAnimateType(animation, ZUXAnimateShrink)) scale *= MAX(ZUXAnimateZoomRatio, 1);
+    if (hasZUXAnimateType(animation, ZUXAnimateOut)) scale = 1 / scale;
+    ZUXCGAffineTransformScale(selfTrans, scale);
+    ZUXCGAffineTransformScale(maskTrans, scale);
+    
+    self.transform = selfStartTrans;
+    self.alpha = selfStartAlpha;
+    maskView.transform = maskStartTrans;
+    [UIView animateWithDuration:animation.duration delay:animation.delay options:0
+                     animations:^{
+                         self.transform = selfFinalTrans;
+                         self.alpha = selfFinalAlpha;
+                         maskView.transform = maskFinalTrans;
+                     } completion:^(BOOL finished) { completion(); }];
+}
+
+#pragma mark - ZUXAnimate Implement Methods.
+
+bool hasZUXAnimateType(ZUXAnimation animation, ZUXAnimateType type) { return animation.type & type; }
+
+bool hasZUXAnimateDirection(ZUXAnimation animation, ZUXAnimateDirection type) { return animation.direction & type; }
+
+void ZUXCGAffineTransformTranslate(CGAffineTransform *t, CGVector vector) {
+    *t = CGAffineTransformTranslate(*t, vector.dx, vector.dy);
+}
+
+void ZUXCGAffineTransformScale(CGAffineTransform *t, CGFloat scale) {
+    *t = CGAffineTransformScale(*t, scale, scale);
+}
+
+CGVector ZUXAnimateTranslateVector(UIView *view, ZUXAnimation animation) {
+    CGSize relativeSize = view.frame.size;
+    if (hasZUXAnimateType(animation, ZUXAnimateByWindow))
+        relativeSize = [UIScreen mainScreen].bounds.size;
+    
+    int direction = 1;
+    if (hasZUXAnimateType(animation, ZUXAnimateOut)) direction = -1;
+    
+    CGVector vector = CGVectorMake(0, 0);
+    if (hasZUXAnimateDirection(animation, ZUXAnimateUp)) vector.dy += direction * relativeSize.height;
+    if (hasZUXAnimateDirection(animation, ZUXAnimateLeft)) vector.dx += direction * relativeSize.width;
+    if (hasZUXAnimateDirection(animation, ZUXAnimateDown)) vector.dy -= direction * relativeSize.height;
+    if (hasZUXAnimateDirection(animation, ZUXAnimateRight)) vector.dx -= direction * relativeSize.width;
+    
+    return vector;
+}
+
+@end // UIView (ZUXAnimate) end

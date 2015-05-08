@@ -10,23 +10,31 @@
 #define zutilsX_zconstant_h
 
 #ifndef ZUX_EXTERN
-#ifdef __cplusplus
-#define ZUX_EXTERN          extern "C" __attribute__((visibility ("default")))
-#else
-#define ZUX_EXTERN              extern __attribute__((visibility ("default")))
-#endif
+# ifdef __cplusplus
+#  define ZUX_EXTERN        extern "C" __attribute__((visibility ("default")))
+# else
+#  define ZUX_EXTERN            extern __attribute__((visibility ("default")))
+# endif
 #endif
 
-#ifndef ZUX_STATIC_INLINE
-#define ZUX_STATIC_INLINE	static inline
+#ifndef ZUX_INLINE
+# if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199901L
+#  define ZUX_INLINE        static inline
+# elif defined(__cplusplus)
+#  define ZUX_INLINE        static inline
+# elif defined(__GNUC__)
+#  define ZUX_INLINE        static __inline__
+# else
+#  define ZUX_INLINE        static
+# endif
 #endif
 
 #ifndef ZUX_INSTANCETYPE
-#if __has_feature(objc_instancetype)
-#define ZUX_INSTANCETYPE    instancetype
-#else
-#define ZUX_INSTANCETYPE    id
-#endif
+# if __has_feature(objc_instancetype)
+#  define ZUX_INSTANCETYPE  instancetype
+# else
+#  define ZUX_INSTANCETYPE  id
+# endif
 #endif
 
 #define IS_IPHONE4          ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 960), [[UIScreen mainScreen] currentMode].size) : NO)
