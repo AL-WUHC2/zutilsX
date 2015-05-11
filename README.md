@@ -213,6 +213,24 @@
 
         (struct)        ZUXAnimation // 定义动画类型/方向/持续时间/延迟时间
 
+- UIControl+ZUX
+
+        // 添加-set(SomeAttribute):forState:方法
+        -setBorderWidth:forState:
+        -setBorderColor:forState:
+        -setShadowColor:forState:
+        -setShadowOpacity:forState:
+        -setShadowOffset:forState:
+        -setShadowSize:forState:
+
+        // 添加-(someAttribute)ForState:方法
+        -borderWidthForState:
+        -borderColorForState:
+        -shadowColorForState:
+        -shadowOpacityForState:
+        -shadowOffsetForState:
+        -shadowSizeForState:
+
 - UILabel+ZUX
 
         // 计算Label合适的尺寸.
