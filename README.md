@@ -241,6 +241,10 @@
         // 生成矩形图像并指定颜色.
         -imageRectWithColor:size:
 
+        // 生成渐变矩形图像.
+        -imageGradientRectWithStartColor:endColor:direction:size:
+        -imageGradientRectWithColors:locations:direction:size:
+
         // 生成椭圆形图像并指定颜色.
         -imageEllipseWithColor:size:
 
@@ -283,6 +287,9 @@
 
         // 统一初始化接口.
         -zuxInitial
+
+        // 添加变量, 指定最小点击间隔时间, 避免快速重复点击.
+        extern float ZUXMinOperationInterval;
 
 - ZUXLabel
 

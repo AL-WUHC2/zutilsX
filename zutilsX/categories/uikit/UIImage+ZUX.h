@@ -12,6 +12,12 @@
 
 + (UIImage *)imageRectWithColor:(UIColor *)color size:(CGSize)size;
 
++ (UIImage *)imageGradientRectWithStartColor:(UIColor *)startColor endColor:(UIColor *)endColor
+                                   direction:(CGVector)direction size:(CGSize)size;
+
++ (UIImage *)imageGradientRectWithColors:(NSArray *)colors locations:(NSArray *)locations
+                               direction:(CGVector)direction size:(CGSize)size;
+
 + (UIImage *)imageEllipseWithColor:(UIColor *)color size:(CGSize)size;
 
 + (UIImage *)imageForCurrentDeviceNamed:(NSString *)name;

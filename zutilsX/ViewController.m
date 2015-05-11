@@ -15,7 +15,8 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor grayColor];
     
-    UIControl *content = [[UIControl alloc] init];
+    ZUXControl *content = [[ZUXControl alloc] init];
+    content.backgroundImage = [UIImage imageGradientRectWithStartColor:[UIColor colorWithIntegerRed:253 green:131 blue:60 alpha:255] endColor:[UIColor colorWithIntegerRed:246 green:81 blue:81 alpha:255] direction:CGVectorMake(-1, -1) size:CGRectInset(self.view.bounds, 60, 60).size];
     content.backgroundColor = [UIColor whiteColor];
     content.frame = CGRectInset(self.view.bounds, 60, 60);
     [content setBorderWidth:1 forState:UIControlStateHighlighted];

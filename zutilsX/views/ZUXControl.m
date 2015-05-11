@@ -8,6 +8,8 @@
 
 #import "ZUXControl.h"
 
+float ZUXMinOperationInterval = 0.2;
+
 @implementation ZUXControl
 
 - (id)init {
@@ -38,7 +40,7 @@
 
 - (void)zuxTouchUpInsideEvent:(id)sender {
     self.enabled = NO;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)),
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(ZUXMinOperationInterval * NSEC_PER_SEC)),
                    dispatch_get_main_queue(), ^{ self.enabled = YES; });
 }
 

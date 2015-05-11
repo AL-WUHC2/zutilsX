@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+extern float ZUXMinOperationInterval;
+
 @interface ZUXControl : UIControl
 
 @property (nonatomic, retain) UIImage *backgroundImage;
