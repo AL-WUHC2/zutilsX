@@ -155,11 +155,12 @@
 
 - (NSString *)stringByEscapingForURLQuery {
     static CFStringRef toEscape = CFSTR(":/=,!$&'()*+;[]@#?% ");
-    return ZUX_AUTORELEASE((__bridge NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
-                                                                                        (__bridge CFStringRef)self,
-                                                                                        NULL,
-                                                                                        toEscape,
-                                                                                        kCFStringEncodingUTF8));
+    return ZUX_AUTORELEASE((ZUX_BRIDGE_TRANSFER NSString *)
+                           CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+                                                                   (__bridge CFStringRef)self,
+                                                                   NULL,
+                                                                   toEscape,
+                                                                   kCFStringEncodingUTF8));
 }
 
 
