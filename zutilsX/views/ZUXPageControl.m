@@ -45,31 +45,33 @@
 }
 
 - (void)dealloc {
-    [_pageIndicatorColor release];
-    [_currentPageIndicatorColor release];
-    [_pageIndicatorImage release];
-    [_currentPageIndicatorImage release];
-    [super dealloc];
+    ZUX_RELEASE(_pageIndicatorColor);
+    ZUX_RELEASE(_currentPageIndicatorColor);
+    ZUX_RELEASE(_pageIndicatorImage);
+    ZUX_RELEASE(_currentPageIndicatorImage);
+    ZUX_SUPER_DEALLOC;
 }
 
 - (void)setPageIndicatorColor:(UIColor *)pageIndicatorColor {
-    [pageIndicatorColor retain];
-    [_pageIndicatorColor release];
-    _pageIndicatorColor = pageIndicatorColor;
+    if ([_pageIndicatorColor isEqual:pageIndicatorColor]) return;
     
-    [_pageIndicatorImage release];
-    _pageIndicatorImage = [[UIImage imageEllipseWithColor:_pageIndicatorColor
-                                                     size:CGSizeMake(20, 20)] retain];
+    ZUX_RELEASE(_pageIndicatorColor);
+    _pageIndicatorColor = ZUX_RETAIN(pageIndicatorColor);
+    
+    ZUX_RELEASE(_pageIndicatorImage);
+    _pageIndicatorImage = ZUX_RETAIN([UIImage imageEllipseWithColor:_pageIndicatorColor
+                                                               size:CGSizeMake(20, 20)]);
 }
 
 - (void)setCurrentPageIndicatorColor:(UIColor *)currentPageIndicatorColor {
-    [currentPageIndicatorColor retain];
-    [_currentPageIndicatorColor release];
-    _currentPageIndicatorColor = currentPageIndicatorColor;
+    if ([_currentPageIndicatorColor isEqual:currentPageIndicatorColor]) return;
     
-    [_currentPageIndicatorImage release];
-    _currentPageIndicatorImage = [[UIImage imageEllipseWithColor:_currentPageIndicatorColor
-                                                            size:CGSizeMake(20, 20)] retain];
+    ZUX_RELEASE(_currentPageIndicatorColor);
+    _currentPageIndicatorColor = ZUX_RETAIN(currentPageIndicatorColor);
+    
+    ZUX_RELEASE(_currentPageIndicatorImage);
+    _currentPageIndicatorImage = ZUX_RETAIN([UIImage imageEllipseWithColor:_currentPageIndicatorColor
+                                                                      size:CGSizeMake(20, 20)]);
 }
 
 @end

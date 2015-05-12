@@ -8,6 +8,7 @@
 
 #import "NSDictionary+ZUX.h"
 #import "NSNull+ZUX.h"
+#import "zconstant.h"
 
 @implementation NSDictionary (ZUX)
 
@@ -28,7 +29,7 @@
     [self enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
         if ([keys containsObject:key]) [dict setValue:obj forKey:key];
     }];
-    return [[dict copy] autorelease];
+    return ZUX_AUTORELEASE([dict copy]);
 }
 
 @end

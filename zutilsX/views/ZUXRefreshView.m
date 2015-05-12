@@ -21,8 +21,7 @@
 
 - (void)dealloc {
     _delegate = nil;
-    
-    [super dealloc];
+    ZUX_SUPER_DEALLOC;
 }
 
 - (void)setState:(ZUXRefreshState)state {
@@ -31,7 +30,7 @@
 }
 
 - (void)setRefreshState:(ZUXRefreshState)state {
-    // default do NOTHING
+    // default do NOTHING, overrides
 }
 
 - (void)didScrollView:(UIScrollView *)scrollView {

@@ -9,32 +9,78 @@
 #ifndef zutilsX_zconstant_h
 #define zutilsX_zconstant_h
 
-#ifndef ZUX_EXTERN
-# ifdef __cplusplus
-#  define ZUX_EXTERN        extern "C" __attribute__((visibility ("default")))
-# else
-#  define ZUX_EXTERN            extern __attribute__((visibility ("default")))
-# endif
+#ifdef __cplusplus
+# define ZUX_EXTERN        extern "C" __attribute__((visibility ("default")))
+#else
+# define ZUX_EXTERN            extern __attribute__((visibility ("default")))
 #endif
 
-#ifndef ZUX_INLINE
-# if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199901L
-#  define ZUX_INLINE        static inline
-# elif defined(__cplusplus)
-#  define ZUX_INLINE        static inline
-# elif defined(__GNUC__)
-#  define ZUX_INLINE        static __inline__
-# else
-#  define ZUX_INLINE        static
-# endif
+#if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199901L
+# define ZUX_INLINE        static inline
+#elif defined(__cplusplus)
+# define ZUX_INLINE        static inline
+#elif defined(__GNUC__)
+# define ZUX_INLINE        static __inline__
+#else
+# define ZUX_INLINE        static
 #endif
 
-#ifndef ZUX_INSTANCETYPE
-# if __has_feature(objc_instancetype)
-#  define ZUX_INSTANCETYPE  instancetype
-# else
-#  define ZUX_INSTANCETYPE  id
-# endif
+#if __has_feature(objc_instancetype)
+# define ZUX_INSTANCETYPE  instancetype
+#else
+# define ZUX_INSTANCETYPE  id
+#endif
+
+#define IS_ARC __has_feature(objc_arc)
+
+#if IS_ARC
+# define ZUX_STRONG strong
+#else
+# define ZUX_STRONG retain
+#endif
+
+#if __has_feature(objc_arc_weak)
+# define ZUX_WEAK weak
+#elif IS_ARC
+# define ZUX_WEAK unsafe_unretained
+#else
+# define ZUX_WEAK assign
+#endif
+
+#if IS_ARC
+# define ZUX_AUTORELEASE(exp) exp
+#else
+# define ZUX_AUTORELEASE(exp) [exp autorelease]
+#endif
+
+#if IS_ARC
+# define ZUX_RELEASE(exp)
+#else
+# define ZUX_RELEASE(exp) [exp release]
+#endif
+
+#if IS_ARC
+# define ZUX_RETAIN(exp) exp
+#else
+# define ZUX_RETAIN(exp) [exp retain]
+#endif
+
+#if IS_ARC
+# define ZUX_SUPER_DEALLOC
+#else
+# define ZUX_SUPER_DEALLOC [super dealloc]
+#endif
+
+#if IS_ARC
+# define ZUX_BLOCK_COPY(exp) exp
+#else
+# define ZUX_BLOCK_COPY(exp) _Block_copy(exp)
+#endif
+
+#if IS_ARC
+# define ZUX_BLOCK_RELEASE(exp)
+#else
+# define ZUX_BLOCK_RELEASE(exp) _Block_release(exp)
 #endif
 
 #define IS_IPHONE4          ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 960), [[UIScreen mainScreen] currentMode].size) : NO)

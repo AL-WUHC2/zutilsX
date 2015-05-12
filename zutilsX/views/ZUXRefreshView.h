@@ -7,6 +7,7 @@
 //
 
 #import "ZUXView.h"
+#import "zconstant.h"
 
 typedef NS_ENUM(NSInteger, ZUXRefreshState) {
     ZUXRefreshNormal,
@@ -21,23 +22,12 @@ typedef NS_ENUM(NSInteger, ZUXRefreshPullDirection) {
     ZUXRefreshPullLeft,
 };
 
-@class ZUXRefreshView;
-
-// Delegate
-@protocol ZUXRefreshViewDelegate <NSObject>
-
-@optional
-
-- (BOOL)refreshViewIsLoading:(ZUXRefreshView *)view;
-
-- (void)refreshViewStartLoad:(ZUXRefreshView *)view;
-
-@end
+@protocol ZUXRefreshViewDelegate;
 
 // ZUXRefreshView
 @interface ZUXRefreshView : ZUXView
 
-@property (nonatomic, assign) id<ZUXRefreshViewDelegate> delegate;
+@property (nonatomic, ZUX_WEAK) id<ZUXRefreshViewDelegate> delegate;
 
 @property (nonatomic, assign) ZUXRefreshState state;
 
@@ -56,5 +46,16 @@ typedef NS_ENUM(NSInteger, ZUXRefreshPullDirection) {
 - (void)didFinishedLoading:(UIScrollView *)scrollView;
 
 - (void)setRefreshState:(ZUXRefreshState)state;
+
+@end
+
+// ZUXRefreshViewDelegate
+@protocol ZUXRefreshViewDelegate <NSObject>
+
+@optional
+
+- (BOOL)refreshViewIsLoading:(ZUXRefreshView *)view;
+
+- (void)refreshViewStartLoad:(ZUXRefreshView *)view;
 
 @end

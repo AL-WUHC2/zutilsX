@@ -2,6 +2,8 @@
 
 收集日常开发中积累的工具代码.
 
+2015-05-12: 增加ARC支持.
+
 #####Constant
 
 * 判断当前设备类型.
@@ -312,12 +314,6 @@
         canCopy // 是否长按弹出复制菜单
         canSave // 是否长按弹出保存菜单
 
-- ZUXVerticalGridView & ZUXVerticalGridViewCell
-
-  定宽网格视图.
-
-  需指定列数和行数(初始), 由数据源提供单元格视图实例数与单元格占宽, 托管响应单元格点击事件.
-
 - ZUXRefreshView
 
   滚动刷新工具视图.
@@ -345,6 +341,10 @@
         // 添加属性
         pageIndicatorColor // 默认指示色
         currentPageIndicatorColor // 当前页指示色
+
+- ZUXSearchBar
+
+  搜索栏组件.
 
 #####MBProgressHUD
 

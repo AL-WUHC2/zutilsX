@@ -7,13 +7,14 @@
 //
 
 #import "UIView+MBProgressHUD.h"
+#import "zconstant.h"
 
 @implementation UIView (MBProgressHUD)
 
 - (MBProgressHUD *)mbProgressHUD {
     MBProgressHUD *hud = [MBProgressHUD HUDForView:self];
     if (!hud) {
-        hud = [[[MBProgressHUD alloc] initWithView:self] autorelease];
+        hud = ZUX_AUTORELEASE([[MBProgressHUD alloc] initWithView:self]);
         hud.square = YES;
         hud.animationType = MBProgressHUDAnimationFade;
         hud.removeFromSuperViewOnHide = YES;

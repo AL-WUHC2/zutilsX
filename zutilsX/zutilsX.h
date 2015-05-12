@@ -15,10 +15,9 @@
 #import "ZUXControl.h"
 #import "ZUXLabel.h"
 #import "ZUXImageView.h"
-#import "ZUXVerticalGridView.h"
-#import "ZUXVerticalGridViewCell.h"
 #import "ZUXRefreshView.h"
 #import "ZUXPageControl.h"
+#import "ZUXSearchBar.h"
 
 #import "NSObject+ZUX.h"
 #import "NSNull+ZUX.h"

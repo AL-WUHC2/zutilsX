@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "zconstant.h"
 
 extern float ZUXMinOperationInterval;
 
 @interface ZUXControl : UIControl
 
-@property (nonatomic, retain) UIImage *backgroundImage;
+@property (nonatomic, ZUX_STRONG) UIImage *backgroundImage;
 
 - (void)zuxInitial;
 

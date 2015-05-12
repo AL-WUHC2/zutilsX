@@ -22,11 +22,11 @@
     [content setBorderWidth:1 forState:UIControlStateHighlighted];
     [content setBorderColor:[UIColor blackColor] forState:UIControlStateHighlighted];
     [self.view addSubview:content];
-    [content release];
+    ZUX_RELEASE(content);
 }
 
 - (void)dealloc {
-    [super dealloc];
+    ZUX_SUPER_DEALLOC;
 }
 
 @end

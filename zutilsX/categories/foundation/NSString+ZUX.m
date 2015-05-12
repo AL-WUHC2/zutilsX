@@ -114,16 +114,16 @@
 + (ZUX_INSTANCETYPE)stringWithArray:(NSArray *)array separator:(NSString *)separatorString {
     if (!array) return @"";
     
-    NSMutableString *result = [[[NSMutableString alloc] init] autorelease];
+    NSMutableString *result = [NSMutableString string];
     for (int i = 0; i < [array count]; i++) {
         [result appendString:[[array objectAtIndex:i] description]];
         if (i + 1 < [array count]) [result appendString:separatorString];
     }
-    return [[result copy] autorelease];
+    return ZUX_AUTORELEASE([result copy]);
 }
 
 - (NSString *)appendWithObjects:(id)firstObj, ... NS_REQUIRES_NIL_TERMINATION {
-    NSMutableArray *temp = [[[NSMutableArray alloc] initWithObjects:self, nil] autorelease];
+    NSMutableArray *temp = [NSMutableArray arrayWithObjects:self, nil];
     
     if (firstObj) {
         id arg = firstObj;
@@ -155,11 +155,11 @@
 
 - (NSString *)stringByEscapingForURLQuery {
     static CFStringRef toEscape = CFSTR(":/=,!$&'()*+;[]@#?% ");
-    return [(NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
-                                                                (__bridge CFStringRef)self,
-                                                                NULL,
-                                                                toEscape,
-                                                                kCFStringEncodingUTF8) autorelease];
+    return ZUX_AUTORELEASE((__bridge NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+                                                                                        (__bridge CFStringRef)self,
+                                                                                        NULL,
+                                                                                        toEscape,
+                                                                                        kCFStringEncodingUTF8));
 }
 
 
@@ -177,7 +177,7 @@
     for (i = 0; i < CC_MD5_DIGEST_LENGTH; i++) {
         [ms appendFormat:@"%02x", digest[i]];
     }
-    return [[ms copy] autorelease];
+    return ZUX_AUTORELEASE([ms copy]);
 }
 
 - (NSString *)SHA1Sum {
@@ -188,7 +188,7 @@
     for (i = 0; i < CC_SHA1_DIGEST_LENGTH; i++) {
         [ms appendFormat:@"%02x", digest[i]];
     }
-    return [[ms copy] autorelease];
+    return ZUX_AUTORELEASE([ms copy]);
 }
 
 - (NSString *)base64EncodedString  {
@@ -200,8 +200,8 @@
 }
 
 + (NSString *)stringWithBase64String:(NSString *)base64String {
-    return [[[NSString alloc] initWithData:[NSData dataWithBase64String:base64String]
-                                  encoding:NSUTF8StringEncoding] autorelease];
+    return ZUX_AUTORELEASE([[NSString alloc] initWithData:[NSData dataWithBase64String:base64String]
+                                                 encoding:NSUTF8StringEncoding]);
 }
 
 + (NSString *)replaceUnicodeToUTF8:(NSString *)aUnicodeString {
@@ -240,7 +240,7 @@
 #pragma mark - Parametric builder.
 
 - (NSString *)parametricStringWithObject:(id)object {
-    NSMutableString *result = [[[NSMutableString alloc] init] autorelease];
+    NSMutableString *result = [NSMutableString string];
     NSUInteger start = 0, end = [self indexOfString:@"${" fromIndex:start];
     while (end != NSNotFound) {
         [result appendString:[self substringWithRange:NSMakeRange(start, end)]];
@@ -254,7 +254,7 @@
     }
     if (start < [self length])
         [result appendString:[self substringWithRange:NSMakeRange(start, [self length])]];
-    return [[result copy] autorelease];
+    return ZUX_AUTORELEASE([result copy]);
 }
 
 @end

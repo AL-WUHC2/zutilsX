@@ -7,7 +7,6 @@
 //
 
 #import "ZUXView.h"
-#import "zconstant.h"
 
 @implementation ZUXView
 
@@ -27,8 +26,8 @@
 }
 
 - (void)dealloc {
-    [_backgroundImage release];
-    [super dealloc];
+    ZUX_RELEASE(_backgroundImage);
+    ZUX_SUPER_DEALLOC;
 }
 
 - (void)zuxInitial {
@@ -41,9 +40,10 @@
 }
 
 - (void)setBackgroundImage:(UIImage *)backgroundImage {
-    [backgroundImage retain];
-    [_backgroundImage release];
-    _backgroundImage = backgroundImage;
+    if ([_backgroundImage isEqual:backgroundImage]) return;
+    
+    ZUX_RELEASE(_backgroundImage);
+    _backgroundImage = ZUX_RETAIN(backgroundImage);
     [self setNeedsDisplay];
 }
 

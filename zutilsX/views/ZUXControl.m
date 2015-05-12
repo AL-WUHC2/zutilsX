@@ -12,24 +12,24 @@ float ZUXMinOperationInterval = 0.2;
 
 @implementation ZUXControl
 
-- (id)init {
+- (ZUX_INSTANCETYPE)init {
     if (self = [super init]) [self zuxInitial];
     return self;
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder {
+- (ZUX_INSTANCETYPE)initWithCoder:(NSCoder *)aDecoder {
     if (self = [super initWithCoder:aDecoder]) [self zuxInitial];
     return self;
 }
 
-- (id)initWithFrame:(CGRect)frame {
+- (ZUX_INSTANCETYPE)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) [self zuxInitial];
     return self;
 }
 
 - (void)dealloc {
-    [_backgroundImage release];
-    [super dealloc];
+    ZUX_RELEASE(_backgroundImage);
+    ZUX_SUPER_DEALLOC;
 }
 
 - (void)zuxInitial {
@@ -50,9 +50,10 @@ float ZUXMinOperationInterval = 0.2;
 }
 
 - (void)setBackgroundImage:(UIImage *)backgroundImage {
-    [backgroundImage retain];
-    [_backgroundImage release];
-    _backgroundImage = backgroundImage;
+    if ([_backgroundImage isEqual:backgroundImage]) return;
+    
+    ZUX_RELEASE(_backgroundImage);
+    _backgroundImage = ZUX_RETAIN(backgroundImage);
     [self setNeedsDisplay];
 }
 

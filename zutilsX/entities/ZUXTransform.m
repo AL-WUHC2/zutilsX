@@ -11,7 +11,7 @@
 @implementation ZUXTransform
 
 + (ZUX_INSTANCETYPE)transformWithBlock:(ZUXTransformBlock)block {
-    return [[[self alloc] initWithBlock:block] autorelease];
+    return ZUX_AUTORELEASE([[self alloc] initWithBlock:block]);
 }
 
 - (ZUX_INSTANCETYPE)init {
@@ -20,7 +20,7 @@
 }
 
 - (ZUX_INSTANCETYPE)initWithBlock:(ZUXTransformBlock)block {
-    if (self = [super init]) _block = Block_copy(block);
+    if (self = [super init]) _block = ZUX_BLOCK_COPY(block);
     return self;
 }
 
@@ -29,14 +29,14 @@
 }
 
 - (void)dealloc {
-    if (_block) Block_release(_block);
-    [super dealloc];
+    if (_block) ZUX_BLOCK_RELEASE(_block);
+    ZUX_SUPER_DEALLOC;
 }
 
 #pragma mark - Some Convenience Transform.
 
 + (ZUXTransform *)nilTransform {
-    return [[[self alloc] init] autorelease];
+    return ZUX_AUTORELEASE([[self alloc] init]);
 }
 
 + (ZUXTransform *)fullWidthTransform {

@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "zconstant.h"
 
 @interface ZUXLabel : UILabel
 
-@property (nonatomic, retain) UIImage *backgroundImage;
+@property (nonatomic, ZUX_STRONG) UIImage *backgroundImage;
 
 @property (nonatomic, assign) CGFloat linesSpacing;
 

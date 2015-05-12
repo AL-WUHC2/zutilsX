@@ -7,11 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6A4428571B01CB6000A0CAFD /* ZUXSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A4428561B01CB6000A0CAFD /* ZUXSearchBar.m */; };
 		6A5BED4C1AF1D8F90028B75E /* NSValue+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5BED4B1AF1D8F90028B75E /* NSValue+ZUX.m */; };
 		6A5BED4F1AF1F3CB0028B75E /* NSString+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5BED4E1AF1F3CB0028B75E /* NSString+ZUX.m */; };
 		6A5BED521AF205810028B75E /* NSExpression+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5BED511AF205810028B75E /* NSExpression+ZUX.m */; };
-		6A5DE5D11AF74C3500470B17 /* ZUXVerticalGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5DE5D01AF74C3500470B17 /* ZUXVerticalGridView.m */; };
-		6A5DE5D41AF74DF100470B17 /* ZUXVerticalGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5DE5D31AF74DF100470B17 /* ZUXVerticalGridViewCell.m */; };
 		6A5DE5D91AF793EA00470B17 /* ZUXControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5DE5D81AF793EA00470B17 /* ZUXControl.m */; };
 		6A5DE5DC1AF7949F00470B17 /* ZUXLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5DE5DB1AF7949F00470B17 /* ZUXLabel.m */; };
 		6A5DE5DF1AF7974E00470B17 /* UILabel+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5DE5DE1AF7974E00470B17 /* UILabel+ZUX.m */; };
@@ -50,16 +49,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6A4428551B01CB6000A0CAFD /* ZUXSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZUXSearchBar.h; path = views/ZUXSearchBar.h; sourceTree = "<group>"; };
+		6A4428561B01CB6000A0CAFD /* ZUXSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZUXSearchBar.m; path = views/ZUXSearchBar.m; sourceTree = "<group>"; };
 		6A5BED4A1AF1D8F90028B75E /* NSValue+ZUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSValue+ZUX.h"; path = "categories/foundation/NSValue+ZUX.h"; sourceTree = "<group>"; };
 		6A5BED4B1AF1D8F90028B75E /* NSValue+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSValue+ZUX.m"; path = "categories/foundation/NSValue+ZUX.m"; sourceTree = "<group>"; };
 		6A5BED4D1AF1F3CB0028B75E /* NSString+ZUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+ZUX.h"; path = "categories/foundation/NSString+ZUX.h"; sourceTree = "<group>"; };
 		6A5BED4E1AF1F3CB0028B75E /* NSString+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+ZUX.m"; path = "categories/foundation/NSString+ZUX.m"; sourceTree = "<group>"; };
 		6A5BED501AF205810028B75E /* NSExpression+ZUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSExpression+ZUX.h"; path = "categories/foundation/NSExpression+ZUX.h"; sourceTree = "<group>"; };
 		6A5BED511AF205810028B75E /* NSExpression+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSExpression+ZUX.m"; path = "categories/foundation/NSExpression+ZUX.m"; sourceTree = "<group>"; };
-		6A5DE5CF1AF74C3500470B17 /* ZUXVerticalGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZUXVerticalGridView.h; path = views/ZUXVerticalGridView.h; sourceTree = "<group>"; };
-		6A5DE5D01AF74C3500470B17 /* ZUXVerticalGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZUXVerticalGridView.m; path = views/ZUXVerticalGridView.m; sourceTree = "<group>"; };
-		6A5DE5D21AF74DF100470B17 /* ZUXVerticalGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZUXVerticalGridViewCell.h; path = views/ZUXVerticalGridViewCell.h; sourceTree = "<group>"; };
-		6A5DE5D31AF74DF100470B17 /* ZUXVerticalGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZUXVerticalGridViewCell.m; path = views/ZUXVerticalGridViewCell.m; sourceTree = "<group>"; };
 		6A5DE5D61AF754BA00470B17 /* ZUXVerticalGridViewCellInternal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ZUXVerticalGridViewCellInternal.h; path = privates/ZUXVerticalGridViewCellInternal.h; sourceTree = "<group>"; };
 		6A5DE5D71AF793EA00470B17 /* ZUXControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZUXControl.h; path = views/ZUXControl.h; sourceTree = "<group>"; };
 		6A5DE5D81AF793EA00470B17 /* ZUXControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZUXControl.m; path = views/ZUXControl.m; sourceTree = "<group>"; };
@@ -237,14 +234,12 @@
 				6A5DE5DB1AF7949F00470B17 /* ZUXLabel.m */,
 				6A5DE5E91AF79AC600470B17 /* ZUXImageView.h */,
 				6A5DE5EA1AF79AC600470B17 /* ZUXImageView.m */,
-				6A5DE5CF1AF74C3500470B17 /* ZUXVerticalGridView.h */,
-				6A5DE5D01AF74C3500470B17 /* ZUXVerticalGridView.m */,
-				6A5DE5D21AF74DF100470B17 /* ZUXVerticalGridViewCell.h */,
-				6A5DE5D31AF74DF100470B17 /* ZUXVerticalGridViewCell.m */,
 				6A5DE5E01AF797D200470B17 /* ZUXRefreshView.h */,
 				6A5DE5E11AF797D200470B17 /* ZUXRefreshView.m */,
 				6A5DE5E31AF7985000470B17 /* ZUXPageControl.h */,
 				6A5DE5E41AF7985000470B17 /* ZUXPageControl.m */,
+				6A4428551B01CB6000A0CAFD /* ZUXSearchBar.h */,
+				6A4428561B01CB6000A0CAFD /* ZUXSearchBar.m */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -404,14 +399,13 @@
 				6A7E34311B009C5700C04FCB /* UIControl+ZUX.m in Sources */,
 				6A5DE5E51AF7985000470B17 /* ZUXPageControl.m in Sources */,
 				6A5DE5EE1AF7A99400470B17 /* NSData+ZUX.m in Sources */,
-				6A5DE5D11AF74C3500470B17 /* ZUXVerticalGridView.m in Sources */,
+				6A4428571B01CB6000A0CAFD /* ZUXSearchBar.m in Sources */,
 				6A5BED4F1AF1F3CB0028B75E /* NSString+ZUX.m in Sources */,
 				6A5DE5DC1AF7949F00470B17 /* ZUXLabel.m in Sources */,
 				6A5DE5E81AF7988E00470B17 /* UIImage+ZUX.m in Sources */,
 				6A5DE5F81AF7B04C00470B17 /* MBProgressHUD.m in Sources */,
 				6A62CBC11AEDDA7A0017D418 /* ViewController.m in Sources */,
 				6A62CBFF1AEE810A0017D418 /* NSObject+ZUX.m in Sources */,
-				6A5DE5D41AF74DF100470B17 /* ZUXVerticalGridViewCell.m in Sources */,
 				6A5DE5F11AF7AAE700470B17 /* UIColor+ZUX.m in Sources */,
 				6A62CBF81AEE65400017D418 /* NSArray+ZUX.m in Sources */,
 				6A62CBE71AEDDF970017D418 /* NSNull+ZUX.m in Sources */,
@@ -455,7 +449,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -500,7 +494,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;

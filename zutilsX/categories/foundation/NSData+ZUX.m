@@ -7,6 +7,7 @@
 //
 
 #import "NSData+ZUX.h"
+#import "zconstant.h"
 
 static const char _base64EncodingTable[64] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 static const short _base64DecodingTable[256] = {
@@ -55,7 +56,7 @@ static const short _base64DecodingTable[256] = {
         output[index + 3] = (i + 2) < length ? _base64EncodingTable[(value >> 0) & 0x3F] : '=';
     }
     
-    return [[[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding] autorelease];
+    return ZUX_AUTORELEASE([[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]);
 }
 
 // Adapted from http://www.cocoadev.com/index.pl?BaseSixtyFour

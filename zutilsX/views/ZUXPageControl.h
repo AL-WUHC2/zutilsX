@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "zconstant.h"
 
 @interface ZUXPageControl : UIPageControl
 
-@property (nonatomic, retain) UIColor *pageIndicatorColor;
+@property (nonatomic, ZUX_STRONG) UIColor *pageIndicatorColor;
 
-@property (nonatomic, retain) UIColor *currentPageIndicatorColor;
+@property (nonatomic, ZUX_STRONG) UIColor *currentPageIndicatorColor;
 
 @end

@@ -7,9 +7,24 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "zconstant.h"
 
-@class ZUXImageView;
+@protocol ZUXImageViewDelegate;
 
+// ZUXImageView
+@interface ZUXImageView : UIImageView
+
+@property (nonatomic, ZUX_WEAK) id<ZUXImageViewDelegate> delegate;
+
+@property (nonatomic, assign, getter=canCopy) BOOL canCopy;
+
+@property (nonatomic, assign, getter=canSave) BOOL canSave;
+
+- (void)zuxInitial;
+
+@end
+
+// ZUXImageViewDelegate
 @protocol ZUXImageViewDelegate <NSObject>
 
 @optional
@@ -19,17 +34,5 @@
 - (void)saveImageSuccessInImageView:(ZUXImageView *)view;
 
 - (void)saveImageFailedInImageView:(ZUXImageView *)view withError:(NSError *)error;
-
-@end
-
-@interface ZUXImageView : UIImageView
-
-@property (nonatomic, assign) id<ZUXImageViewDelegate> delegate;
-
-@property (nonatomic, assign, getter=canCopy) BOOL canCopy;
-
-@property (nonatomic, assign, getter=canSave) BOOL canSave;
-
-- (void)zuxInitial;
 
 @end

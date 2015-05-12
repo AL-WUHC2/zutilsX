@@ -11,7 +11,7 @@
 @implementation NSNumber (ZUX)
 
 + (ZUX_INSTANCETYPE)numberWithCGFloat:(CGFloat)value {
-    return [[[self alloc] initWithCGFloat:value] autorelease];
+    return ZUX_AUTORELEASE([[self alloc] initWithCGFloat:value]);
 }
 
 #if defined(__LP64__) && __LP64__

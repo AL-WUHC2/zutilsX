@@ -10,27 +10,27 @@
 
 @implementation ZUXImageView
 
-- (id)init {
+- (ZUX_INSTANCETYPE)init {
     if (self = [super init]) [self zuxInitial];
     return self;
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder {
+- (ZUX_INSTANCETYPE)initWithCoder:(NSCoder *)aDecoder {
     if (self = [super initWithCoder:aDecoder]) [self zuxInitial];
     return self;
 }
 
-- (id)initWithFrame:(CGRect)frame {
+- (ZUX_INSTANCETYPE)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) [self zuxInitial];
     return self;
 }
 
-- (id)initWithImage:(UIImage *)image {
+- (ZUX_INSTANCETYPE)initWithImage:(UIImage *)image {
     if (self = [super initWithImage:image]) [self zuxInitial];
     return self;
 }
 
-- (id)initWithImage:(UIImage *)image highlightedImage:(UIImage *)highlightedImage {
+- (ZUX_INSTANCETYPE)initWithImage:(UIImage *)image highlightedImage:(UIImage *)highlightedImage {
     if (self = [super initWithImage:image highlightedImage:highlightedImage]) [self zuxInitial];
     return self;
 }
@@ -38,13 +38,13 @@
 - (void)dealloc {
     [[UIMenuController sharedMenuController] setMenuVisible:NO animated:NO];
     _delegate = nil;
-    [super dealloc];
+    ZUX_SUPER_DEALLOC;
 }
 
 - (void)zuxInitial {
     self.userInteractionEnabled = YES;
-    [self addGestureRecognizer:[[[UILongPressGestureRecognizer alloc]
-                                 initWithTarget:self action:@selector(longPress:)] autorelease]];
+    [self addGestureRecognizer:ZUX_AUTORELEASE([[UILongPressGestureRecognizer alloc]
+                                                initWithTarget:self action:@selector(longPress:)])];
 }
 
 - (void)longPress:(UILongPressGestureRecognizer *)gestureRecognizer  {
@@ -52,8 +52,8 @@
         [gestureRecognizer.view becomeFirstResponder];
         
         UIMenuController *menuController = [UIMenuController sharedMenuController];
-        menuController.menuItems = @[[[[UIMenuItem alloc] initWithTitle:@"复制" action:@selector(zuxCopy:)] autorelease],
-                                     [[[UIMenuItem alloc] initWithTitle:@"保存" action:@selector(zuxSave:)] autorelease]];
+        menuController.menuItems = @[ZUX_AUTORELEASE([[UIMenuItem alloc] initWithTitle:@"复制" action:@selector(zuxCopy:)]),
+                                     ZUX_AUTORELEASE([[UIMenuItem alloc] initWithTitle:@"保存" action:@selector(zuxSave:)])];
         
         if ([_delegate respondsToSelector:@selector(menuLocationInImageView:)]) {
             [menuController setTargetRect:[_delegate menuLocationInImageView:self]

@@ -30,7 +30,7 @@ CGGradientRef CreateGradientWithColorsAndLocations(NSArray *colors, NSArray *loc
     
     CGGradientRef gradient = CGGradientCreateWithColors(colorSpace, (__bridge CFArrayRef)gradientColors, gradientLocations);
     
-    [gradientColors release];
+    ZUX_RELEASE(gradientColors);
     if (gradientLocations) free(gradientLocations);
     
     return gradient;
