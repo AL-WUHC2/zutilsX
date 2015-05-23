@@ -51,6 +51,12 @@
         -initWithCGFloat:
         -cgfloatValue
 
+* NSCoder+ZUX
+
+        // 添加NSCoder与CGFloat兼容方法.
+        -encodeCGFloat:forKey:
+        -decodeCGFloatForKey:
+
 * NSArray+ZUX
 
         // 深拷贝数组.
@@ -295,10 +301,15 @@
 
 - ZUXLabel
 
-  扩展UILabel.
+  扩展UILabel, 可复制文本内容.
 
         // 统一默认设置
         self.backgroundColor = [UIColor clearColor];
+
+        // 添加长按手势弹出菜单.
+
+        // 添加属性
+        canCopy // 是否长按弹出复制菜单
 
         // 添加属性
         backgroundImage
@@ -375,3 +386,11 @@
 - ZUXTransform
 
   变换函数类, 用于自适应UIView的变换式定义.
+
+#####Utils
+
+- ZUXGeometry.h
+
+    添加二维坐标工具方法.
+
+        CGRect ZUX_CGRectMake(CGPoint, CGSize);

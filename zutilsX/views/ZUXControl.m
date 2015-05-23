@@ -18,7 +18,9 @@ float ZUXMinOperationInterval = 0.2;
 }
 
 - (ZUX_INSTANCETYPE)initWithCoder:(NSCoder *)aDecoder {
-    if (self = [super initWithCoder:aDecoder]) [self zuxInitial];
+    if (self = [super initWithCoder:aDecoder]) {
+        _backgroundImage = ZUX_RETAIN([aDecoder decodeObjectOfClass:[UIImage class] forKey:@"backgroundImage"]);
+    }
     return self;
 }
 
@@ -27,15 +29,20 @@ float ZUXMinOperationInterval = 0.2;
     return self;
 }
 
+- (void)zuxInitial {
+    self.backgroundColor = [UIColor clearColor];
+    [self addTarget:self action:@selector(zuxTouchUpInsideEvent:)
+   forControlEvents:UIControlEventTouchUpInside];
+}
+
 - (void)dealloc {
     ZUX_RELEASE(_backgroundImage);
     ZUX_SUPER_DEALLOC;
 }
 
-- (void)zuxInitial {
-    self.backgroundColor = [UIColor clearColor];
-    [self addTarget:self action:@selector(zuxTouchUpInsideEvent:)
-   forControlEvents:UIControlEventTouchUpInside];
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    [aCoder encodeObject:_backgroundImage forKey:@"backgroundImage"];
 }
 
 - (void)zuxTouchUpInsideEvent:(id)sender {

@@ -9,12 +9,28 @@
 #import <UIKit/UIKit.h>
 #import "zconstant.h"
 
+@protocol ZUXLabelDataSource;
+
+// ZUXLabel
 @interface ZUXLabel : UILabel
+
+@property (nonatomic, ZUX_WEAK) id<ZUXLabelDataSource> dataSource;
+
+@property (nonatomic, assign, getter=canCopy) BOOL canCopy;
 
 @property (nonatomic, ZUX_STRONG) UIImage *backgroundImage;
 
 @property (nonatomic, assign) CGFloat linesSpacing;
 
 - (void)zuxInitial;
+
+@end
+
+// ZUXLabelDataSource
+@protocol ZUXLabelDataSource <NSObject>
+
+@optional
+
+- (CGPoint)menuLocationInLabel:(ZUXLabel *)view;
 
 @end

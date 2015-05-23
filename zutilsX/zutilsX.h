@@ -22,6 +22,7 @@
 #import "NSObject+ZUX.h"
 #import "NSNull+ZUX.h"
 #import "NSNumber+ZUX.h"
+#import "NSCoder+ZUX.h"
 #import "NSArray+ZUX.h"
 #import "NSDictionary+ZUX.h"
 #import "NSData+ZUX.h"
@@ -39,5 +40,7 @@
 
 #import "MBProgressHUD.h"
 #import "UIView+MBProgressHUD.h"
+
+#import "ZUXGeometry.h"
 
 #endif

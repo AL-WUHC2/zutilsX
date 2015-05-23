@@ -7,6 +7,7 @@
 //
 
 #import "ZUXImageView.h"
+#import "ZUXGeometry.h"
 
 @implementation ZUXImageView
 
@@ -16,7 +17,10 @@
 }
 
 - (ZUX_INSTANCETYPE)initWithCoder:(NSCoder *)aDecoder {
-    if (self = [super initWithCoder:aDecoder]) [self zuxInitial];
+    if (self = [super initWithCoder:aDecoder]) {
+        _canCopy = [aDecoder decodeBoolForKey:@"canCopy"];
+        _canSave = [aDecoder decodeBoolForKey:@"canSave"];
+    }
     return self;
 }
 
@@ -35,16 +39,23 @@
     return self;
 }
 
-- (void)dealloc {
-    [[UIMenuController sharedMenuController] setMenuVisible:NO animated:NO];
-    _delegate = nil;
-    ZUX_SUPER_DEALLOC;
-}
-
 - (void)zuxInitial {
     self.userInteractionEnabled = YES;
     [self addGestureRecognizer:ZUX_AUTORELEASE([[UILongPressGestureRecognizer alloc]
                                                 initWithTarget:self action:@selector(longPress:)])];
+}
+
+- (void)dealloc {
+    [[UIMenuController sharedMenuController] setMenuVisible:NO animated:NO];
+    _dataSource = nil;
+    _delegate = nil;
+    ZUX_SUPER_DEALLOC;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    [aCoder encodeBool:_canCopy forKey:@"canCopy"];
+    [aCoder encodeBool:_canSave forKey:@"canSave"];
 }
 
 - (void)longPress:(UILongPressGestureRecognizer *)gestureRecognizer  {
@@ -55,12 +66,11 @@
         menuController.menuItems = @[ZUX_AUTORELEASE([[UIMenuItem alloc] initWithTitle:@"复制" action:@selector(zuxCopy:)]),
                                      ZUX_AUTORELEASE([[UIMenuItem alloc] initWithTitle:@"保存" action:@selector(zuxSave:)])];
         
-        if ([_delegate respondsToSelector:@selector(menuLocationInImageView:)]) {
-            [menuController setTargetRect:[_delegate menuLocationInImageView:self]
+        if ([_dataSource respondsToSelector:@selector(menuLocationInImageView:)]) {
+            [menuController setTargetRect:ZUX_CGRectMake([_dataSource menuLocationInImageView:self], CGSizeZero)
                                    inView:gestureRecognizer.view];
         } else {
-            CGPoint location = [gestureRecognizer locationInView:gestureRecognizer.view];
-            [menuController setTargetRect:CGRectMake(location.x, location.y, 0, 0)
+            [menuController setTargetRect:ZUX_CGRectMake([gestureRecognizer locationInView:gestureRecognizer.view], CGSizeZero)
                                    inView:gestureRecognizer.view];
         }
         [menuController setMenuVisible:YES animated:YES];

@@ -16,7 +16,9 @@
 }
 
 - (ZUX_INSTANCETYPE)initWithCoder:(NSCoder *)aDecoder {
-    if (self = [super initWithCoder:aDecoder]) [self zuxInitial];
+    if (self = [super initWithCoder:aDecoder]) {
+        _backgroundImage = ZUX_RETAIN([aDecoder decodeObjectOfClass:[UIImage class] forKey:@"backgroundImage"]);
+    }
     return self;
 }
 
@@ -25,13 +27,18 @@
     return self;
 }
 
+- (void)zuxInitial {
+    self.backgroundColor = [UIColor clearColor];
+}
+
 - (void)dealloc {
     ZUX_RELEASE(_backgroundImage);
     ZUX_SUPER_DEALLOC;
 }
 
-- (void)zuxInitial {
-    self.backgroundColor = [UIColor clearColor];
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    [aCoder encodeObject:_backgroundImage forKey:@"backgroundImage"];
 }
 
 - (void)drawRect:(CGRect)rect {

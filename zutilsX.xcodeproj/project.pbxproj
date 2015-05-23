@@ -36,6 +36,7 @@
 		6A62CBFF1AEE810A0017D418 /* NSObject+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A62CBFE1AEE810A0017D418 /* NSObject+ZUX.m */; };
 		6A7E34311B009C5700C04FCB /* UIControl+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A7E34301B009C5700C04FCB /* UIControl+ZUX.m */; };
 		6ADE83F41AF07ADA00214B21 /* ZUXTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ADE83F31AF07ADA00214B21 /* ZUXTransform.m */; };
+		6AEEFB811B05BB4600080C92 /* NSCoder+ZUX.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AEEFB801B05BB4600080C92 /* NSCoder+ZUX.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,8 +110,11 @@
 		6A62CBFE1AEE810A0017D418 /* NSObject+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+ZUX.m"; path = "categories/foundation/NSObject+ZUX.m"; sourceTree = "<group>"; };
 		6A7E342F1B009C5700C04FCB /* UIControl+ZUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIControl+ZUX.h"; path = "categories/uikit/UIControl+ZUX.h"; sourceTree = "<group>"; };
 		6A7E34301B009C5700C04FCB /* UIControl+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIControl+ZUX.m"; path = "categories/uikit/UIControl+ZUX.m"; sourceTree = "<group>"; };
+		6AA0331C1B1075B400D2D082 /* ZUXGeometry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ZUXGeometry.h; path = utils/ZUXGeometry.h; sourceTree = "<group>"; };
 		6ADE83F21AF07ADA00214B21 /* ZUXTransform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZUXTransform.h; path = entities/ZUXTransform.h; sourceTree = "<group>"; };
 		6ADE83F31AF07ADA00214B21 /* ZUXTransform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZUXTransform.m; path = entities/ZUXTransform.m; sourceTree = "<group>"; };
+		6AEEFB7F1B05BB4600080C92 /* NSCoder+ZUX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSCoder+ZUX.h"; path = "categories/foundation/NSCoder+ZUX.h"; sourceTree = "<group>"; };
+		6AEEFB801B05BB4600080C92 /* NSCoder+ZUX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSCoder+ZUX.m"; path = "categories/foundation/NSCoder+ZUX.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +180,7 @@
 				6A62CBDE1AEDDC380017D418 /* categories */,
 				6ADE83EE1AF07A4C00214B21 /* entities */,
 				6A5DE5D51AF7548100470B17 /* privates */,
+				6AA0331B1B10757F00D2D082 /* utils */,
 				6A62CBF51AEE5E780017D418 /* zutilsX.h */,
 				6A62CBF11AEE04680017D418 /* zconstant.h */,
 				6A62CBBC1AEDDA7A0017D418 /* AppDelegate.h */,
@@ -270,6 +275,8 @@
 				6A62CBE61AEDDF970017D418 /* NSNull+ZUX.m */,
 				6A62CBF21AEE5A740017D418 /* NSNumber+ZUX.h */,
 				6A62CBF31AEE5A740017D418 /* NSNumber+ZUX.m */,
+				6AEEFB7F1B05BB4600080C92 /* NSCoder+ZUX.h */,
+				6AEEFB801B05BB4600080C92 /* NSCoder+ZUX.m */,
 				6A62CBF61AEE65400017D418 /* NSArray+ZUX.h */,
 				6A62CBF71AEE65400017D418 /* NSArray+ZUX.m */,
 				6A62CBF91AEE65BC0017D418 /* NSDictionary+ZUX.h */,
@@ -284,6 +291,14 @@
 				6A5BED511AF205810028B75E /* NSExpression+ZUX.m */,
 			);
 			name = foundation;
+			sourceTree = "<group>";
+		};
+		6AA0331B1B10757F00D2D082 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				6AA0331C1B1075B400D2D082 /* ZUXGeometry.h */,
+			);
+			name = utils;
 			sourceTree = "<group>";
 		};
 		6ADE83EE1AF07A4C00214B21 /* entities */ = {
@@ -401,6 +416,7 @@
 				6A5DE5EE1AF7A99400470B17 /* NSData+ZUX.m in Sources */,
 				6A4428571B01CB6000A0CAFD /* ZUXSearchBar.m in Sources */,
 				6A5BED4F1AF1F3CB0028B75E /* NSString+ZUX.m in Sources */,
+				6AEEFB811B05BB4600080C92 /* NSCoder+ZUX.m in Sources */,
 				6A5DE5DC1AF7949F00470B17 /* ZUXLabel.m in Sources */,
 				6A5DE5E81AF7988E00470B17 /* UIImage+ZUX.m in Sources */,
 				6A5DE5F81AF7B04C00470B17 /* MBProgressHUD.m in Sources */,

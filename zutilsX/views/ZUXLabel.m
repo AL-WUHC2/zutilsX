@@ -7,7 +7,9 @@
 //
 
 #import "ZUXLabel.h"
+#import "NSCoder+ZUX.h"
 #import "UILabel+ZUX.h"
+#import "ZUXGeometry.h"
 #import <CoreText/CoreText.h>
 
 static inline CTTextAlignment CTTextAlignmentFromZUXLinesSpacingLabel(ZUXLabel *label) {
@@ -65,7 +67,11 @@ static inline NSDictionary * NSAttributedStringAttributesFromZUXLinesSpacingLabe
 }
 
 - (ZUX_INSTANCETYPE)initWithCoder:(NSCoder *)aDecoder {
-    if (self = [super initWithCoder:aDecoder]) [self zuxInitial];
+    if (self = [super initWithCoder:aDecoder]) {
+        _canCopy = [aDecoder decodeBoolForKey:@"canCopy"];
+        _backgroundImage = ZUX_RETAIN([aDecoder decodeObjectOfClass:[UIImage class] forKey:@"backgroundImage"]);
+        _linesSpacing = [aDecoder decodeCGFloatForKey:@"linesSpacing"];
+    }
     return self;
 }
 
@@ -74,14 +80,56 @@ static inline NSDictionary * NSAttributedStringAttributesFromZUXLinesSpacingLabe
     return self;
 }
 
+- (void)zuxInitial {
+    self.userInteractionEnabled = YES;
+    [self addGestureRecognizer:ZUX_AUTORELEASE([[UILongPressGestureRecognizer alloc]
+                                                initWithTarget:self action:@selector(longPress:)])];
+    self.backgroundColor = [UIColor clearColor];
+    _linesSpacing = 0;
+}
+
 - (void)dealloc {
+    [[UIMenuController sharedMenuController] setMenuVisible:NO animated:NO];
+    _dataSource = nil;
     ZUX_RELEASE(_backgroundImage);
     ZUX_SUPER_DEALLOC;
 }
 
-- (void)zuxInitial {
-    self.backgroundColor = [UIColor clearColor];
-    _linesSpacing = 0;
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    [aCoder encodeBool:_canCopy forKey:@"canCopy"];
+    [aCoder encodeObject:_backgroundImage forKey:@"backgroundImage"];
+    [aCoder encodeCGFloat:_linesSpacing forKey:@"linesSpacing"];
+}
+
+- (void)longPress:(UILongPressGestureRecognizer *)gestureRecognizer  {
+    if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
+        [gestureRecognizer.view becomeFirstResponder];
+        
+        UIMenuController *menuController = [UIMenuController sharedMenuController];
+        menuController.menuItems = @[ZUX_AUTORELEASE([[UIMenuItem alloc] initWithTitle:@"复制" action:@selector(zuxCopy:)])];
+        
+        if ([_dataSource respondsToSelector:@selector(menuLocationInLabel:)]) {
+            [menuController setTargetRect:ZUX_CGRectMake([_dataSource menuLocationInLabel:self], CGSizeZero)
+                                   inView:gestureRecognizer.view];
+        } else {
+            [menuController setTargetRect:ZUX_CGRectMake([gestureRecognizer locationInView:gestureRecognizer.view], CGSizeZero)
+                                   inView:gestureRecognizer.view];
+        }
+        [menuController setMenuVisible:YES animated:YES];
+    }
+}
+
+- (BOOL)canBecomeFirstResponder {
+    return YES;
+}
+
+- (BOOL)canPerformAction:(SEL)action withSender:(id)sender {
+    return _canCopy && action == @selector(zuxCopy:);
+}
+
+- (void)zuxCopy:(id)sender {
+    [UIPasteboard generalPasteboard].string = self.text;
 }
 
 - (void)drawRect:(CGRect)rect {
@@ -144,4 +192,5 @@ static inline NSDictionary * NSAttributedStringAttributesFromZUXLinesSpacingLabe
     originalSize.height += (MAX(1, lineCount) - 1) * _linesSpacing;
     return originalSize;
 }
+
 @end

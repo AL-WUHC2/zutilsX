@@ -109,8 +109,10 @@ NSString *const zBottomMargin                   = @"ZBottomMargin";
 @implementation UIView (ZUXAutoLayout)
 
 - (ZUX_INSTANCETYPE)initWithTransformDictionary:(NSDictionary *)transforms {
-    if (self = [super init]) {
-        [self setZTransforms:transforms];
+    if ([self init]) {
+        NSMutableDictionary *zTransforms = ZUX_AUTORELEASE([transforms deepMutableCopy]);
+        objc_setAssociatedObject(self, (__bridge const void *)(zLayoutTransformsDictionaryKey),
+                                 zTransforms, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
         [self p_AddFrameAndBoundsObserversToView:self.superview];
     }
     return self;
@@ -119,7 +121,6 @@ NSString *const zBottomMargin                   = @"ZBottomMargin";
 #pragma mark - Swizzle & Override Methods.
 
 + (void)load {
-    [super load];
     // observe superview change
     [self swizzleOriSelector:@selector(willMoveToSuperview:)
              withNewSelector:@selector(zuxWillMoveToSuperview:)];
@@ -147,7 +148,8 @@ NSString *const zBottomMargin                   = @"ZBottomMargin";
 
 - (void)zuxDealloc {
     [self p_RemoveFrameAndBoundsObserversFromView:self.superview];
-    [self setZTransforms:nil];
+    objc_setAssociatedObject(self, (__bridge const void *)(zLayoutTransformsDictionaryKey),
+                             nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     
     [self zuxDealloc];
 }
@@ -157,12 +159,18 @@ NSString *const zBottomMargin                   = @"ZBottomMargin";
     if (![zLayoutKVOContext isEqual:(__bridge id)(context)]) [super observeValueForKeyPath:keyPath ofObject:object
                                                                      change:change context:context];
     
-    if (([object isEqual:self.superview] && [@[zSuperviewFrameKVOKey, zSuperviewBoundsKVOKey] containsObject:keyPath]) ||
-        ([object isEqual:self] && [zTransformsKVOKey isEqualToString:keyPath]) ||
-        ([object isEqual:self.zTransforms] && [@[zLeftMarginKVOKey, zWidthKVOKey, zRightMarginKVOKey, zTopMarginKVOKey, zHeightKVOKey, zBottomMarginKVOKey] containsObject:keyPath])) {
+    if ([object isEqual:self.superview] && [@[zSuperviewFrameKVOKey, zSuperviewBoundsKVOKey] containsObject:keyPath]) {
         if (!self.superview || !self.zTransforms) return;
         self.frame = rectTransformFromSuperView(self.superview, self.zTransforms);
     }
+}
+
+- (void)didChangeValueForKey:(NSString *)key {
+    if ([@[zTransformsKVOKey, zLeftMarginKVOKey, zWidthKVOKey, zRightMarginKVOKey, zTopMarginKVOKey, zHeightKVOKey, zBottomMarginKVOKey] containsObject:key]) {
+        if (!self.superview || !self.zTransforms) return;
+        self.frame = rectTransformFromSuperView(self.superview, self.zTransforms);
+    }
+    [super didChangeValueForKey:key];
 }
 
 #pragma mark - Properties Methods.
@@ -175,43 +183,9 @@ NSString *const zBottomMargin                   = @"ZBottomMargin";
     NSDictionary *oriTransforms = objc_getAssociatedObject(self, (__bridge const void *)(zLayoutTransformsDictionaryKey));
     if ([oriTransforms isEqualToDictionary:zTransforms]) return;
     
-    [oriTransforms removeObserver:self forKeyPath:zLeftMarginKVOKey
-                          context:(__bridge void *)(zLayoutKVOContext)];
-    [oriTransforms removeObserver:self forKeyPath:zWidthKVOKey
-                          context:(__bridge void *)(zLayoutKVOContext)];
-    [oriTransforms removeObserver:self forKeyPath:zRightMarginKVOKey
-                          context:(__bridge void *)(zLayoutKVOContext)];
-    [oriTransforms removeObserver:self forKeyPath:zTopMarginKVOKey
-                          context:(__bridge void *)(zLayoutKVOContext)];
-    [oriTransforms removeObserver:self forKeyPath:zHeightKVOKey
-                          context:(__bridge void *)(zLayoutKVOContext)];
-    [oriTransforms removeObserver:self forKeyPath:zBottomMarginKVOKey
-                          context:(__bridge void *)(zLayoutKVOContext)];
-    
     NSMutableDictionary *transforms = ZUX_AUTORELEASE([zTransforms deepMutableCopy]);
-    objc_setAssociatedObject(self, (__bridge const void *)(zLayoutTransformsDictionaryKey), transforms,
-                             OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    [transforms addObserver:self forKeyPath:zLeftMarginKVOKey
-                    options:NSKeyValueObservingOptionNew
-                    context:(__bridge void *)(zLayoutKVOContext)];
-    [transforms addObserver:self forKeyPath:zWidthKVOKey
-                    options:NSKeyValueObservingOptionNew
-                    context:(__bridge void *)(zLayoutKVOContext)];
-    [transforms addObserver:self forKeyPath:zRightMarginKVOKey
-                    options:NSKeyValueObservingOptionNew
-                    context:(__bridge void *)(zLayoutKVOContext)];
-    [transforms addObserver:self forKeyPath:zTopMarginKVOKey
-                    options:NSKeyValueObservingOptionNew
-                    context:(__bridge void *)(zLayoutKVOContext)];
-    [transforms addObserver:self forKeyPath:zHeightKVOKey
-                    options:NSKeyValueObservingOptionNew
-                    context:(__bridge void *)(zLayoutKVOContext)];
-    [transforms addObserver:self forKeyPath:zBottomMarginKVOKey
-                    options:NSKeyValueObservingOptionNew
-                    context:(__bridge void *)(zLayoutKVOContext)];
-    
-    [self observeValueForKeyPath:zTransformsKVOKey ofObject:self
-                          change:@{} context:(__bridge void *)(zLayoutKVOContext)];
+    objc_setAssociatedObject(self, (__bridge const void *)(zLayoutTransformsDictionaryKey),
+                             transforms, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (id)zLeftMargin {

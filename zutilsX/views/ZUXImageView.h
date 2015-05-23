@@ -9,10 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "zconstant.h"
 
+@protocol ZUXImageViewDataSource;
+
 @protocol ZUXImageViewDelegate;
 
 // ZUXImageView
 @interface ZUXImageView : UIImageView
+
+@property (nonatomic, ZUX_WEAK) id<ZUXImageViewDataSource> dataSource;
 
 @property (nonatomic, ZUX_WEAK) id<ZUXImageViewDelegate> delegate;
 
@@ -24,12 +28,20 @@
 
 @end
 
+// ZUXImageViewDataSource
+
+@protocol ZUXImageViewDataSource <NSObject>
+
+@optional
+
+- (CGPoint)menuLocationInImageView:(ZUXImageView *)view;
+
+@end
+
 // ZUXImageViewDelegate
 @protocol ZUXImageViewDelegate <NSObject>
 
 @optional
-
-- (CGRect)menuLocationInImageView:(ZUXImageView *)view;
 
 - (void)saveImageSuccessInImageView:(ZUXImageView *)view;
 
